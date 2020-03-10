@@ -36,7 +36,7 @@ namespace WpfPlayground
                 }
             }
 
-            new Commands.CommandWindow().Show();
+            new Behaviors.Behavior01().Show();
 
             //wpfnewtechniques has startup code
 

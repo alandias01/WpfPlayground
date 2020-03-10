@@ -1,0 +1,43 @@
+﻿<Window x:Class="WpfPlayground.Behaviors.Behavior01"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPlayground.Behaviors"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="Behavior01" Height="250" Width="400">
+    <Window.Resources>
+        <DataTemplate x:Key="ListBoxItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" />
+                <TextBlock Text="{Binding Age}" />
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding EmployeeSelectedItem.Name}"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox Grid.Column="0" 
+                     ItemsSource="{Binding EmployeeList}" 
+                     SelectionMode="Multiple" 
+                     SelectedItem="{Binding EmployeeSelectedItem}" 
+                     ItemTemplate="{StaticResource ListBoxItemTemplate}" >                
+                <i:Interaction.Behaviors>
+                    <local:MyListBoxBehavior SelectedItems="{Binding EmployeeSelectedItems}" />
+                </i:Interaction.Behaviors>
+            </ListBox>
+
+            <ListBox Grid.Column="1" ItemsSource="{Binding EmployeeSelectedItems}" ItemTemplate="{StaticResource ListBoxItemTemplate}" />
+        </Grid>        
+    </Grid>
+</Window>
