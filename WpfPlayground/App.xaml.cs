@@ -36,7 +36,7 @@ namespace WpfPlayground
                 }
             }
 
-            new Behaviors.Behavior01().Show();
+            new TriggersConverters.Trigger01().Show();
 
             //wpfnewtechniques has startup code
 

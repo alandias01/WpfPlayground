@@ -1,0 +1,23 @@
+﻿<Window x:Class="WpfPlayground.TriggersConverters.ValueConverter01"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPlayground.TriggersConverters"
+        mc:Ignorable="d"
+        Title="ValueConverter01" Height="450" Width="400" Name="win">
+    <Window.Resources>
+        <local:NumberToMoneyConverter x:Key="NumberToMoneyConv" />
+    </Window.Resources>
+    <Grid>
+        <TextBox Height="23"
+                 Width="120"
+                 Margin="12,34,0,0"                  
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Text="{Binding ElementName=win, Path=Height, Converter={StaticResource NumberToMoneyConv}, UpdateSourceTrigger=PropertyChanged}"                  
+                 Name="textBox1">
+        </TextBox>
+
+    </Grid>
+</Window>
