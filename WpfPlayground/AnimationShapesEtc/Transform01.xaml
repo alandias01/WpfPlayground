@@ -1,0 +1,77 @@
+﻿<Window x:Class="WpfPlayground.AnimationShapesEtc.Transform01"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPlayground.AnimationShapesEtc"
+        mc:Ignorable="d"
+        Title="Transform01" Height="450" Width="800">
+    <!--
+    There are 4 types of transforms, Rotate, Scale, Skew, and translate
+    We put transforms inside either a layout or render transform element
+    LayoutTransform modifies the control before it arranges it
+    Rendertransform arranges the control and then modifies
+    When you do rendertransform, it may go out of the border of a layout like a stackpanel
+    If you want to apply more than 1 transform, wrap it with a transform group
+    -->
+
+
+    <Grid>
+
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+            <StackPanel HorizontalAlignment="Left">
+                <Rectangle Width="20" Height="20" Fill="Black" Stroke="Red">
+                    <Rectangle.BitmapEffect>
+                        <DropShadowBitmapEffect/>
+                    </Rectangle.BitmapEffect>
+                    <Rectangle.LayoutTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="45"/>
+                            <ScaleTransform ScaleX="2" ScaleY="2"/>
+                            <TranslateTransform X="10" Y="10"/>
+                        </TransformGroup>
+                    </Rectangle.LayoutTransform>
+                </Rectangle>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="MAPLE SECURITIES" FontSize="25" Foreground="Green" FontFamily="Times New Roman">
+                    <TextBlock.Effect>
+                        <DropShadowEffect
+                        ShadowDepth="6"
+                        Direction="300"
+                        Color="DarkGreen"
+                        Opacity=".6"
+                        BlurRadius="6"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock
+  Name="MyFadingText"
+  Margin="20" 
+  Width="640" Height="100" FontSize="48" FontWeight="Bold" Foreground="Maroon">
+  This is fading text
+
+  <!-- Animates the text block's opacity. -->
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="TextBlock.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+            Storyboard.TargetName="MyFadingText" 
+            Storyboard.TargetProperty="(TextBlock.Opacity)"
+            From="1.0" To="0.0" Duration="0:0:5" 
+            AutoReverse="True" RepeatBehavior="Forever" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>
+            </StackPanel>
+
+        </StackPanel>
+
+    </Grid>
+</Window>
