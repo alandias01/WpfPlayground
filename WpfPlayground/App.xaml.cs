@@ -36,7 +36,7 @@ namespace WpfPlayground
                 }
             }
 
-            new AnimationShapesEtc.Transform01().Show();
+            new DragAndDrop.DragAndDrop().Show();
 
             //wpfnewtechniques has startup code
 
