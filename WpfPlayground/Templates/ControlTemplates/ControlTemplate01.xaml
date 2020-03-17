@@ -6,7 +6,179 @@
         xmlns:local="clr-namespace:WpfPlayground.Templates.ControlTemplates"
         mc:Ignorable="d"
         Title="ControlTemplate01" Height="450" Width="800">
+    
+    <!--
+    Controls
+    
+    Object->DispatcherObject->DependencyObject->Visual->UIElement->FrameworkElement->Control->ContentControl
+    Object->DispatcherObject->DependencyObject->Visual->UIElement->FrameworkElement->Control->ItemsControl
+    
+    2 types of controls
+    ContentControl holds 1 piece of data
+    ItemsControl holds multiple pieces of data
+    
+    You can inherit from Control but without a ControlTemplate, the control will be invisible
+    Just setting the roperties like Background and BorderBrush won't matter
+    
+    Controls have a control template that contains the visual tree of the control
+    CT is the structure and appearance.  You rewrite the visual appearance
+    You cannot modify part of the visual tree, only replace it
+    To change control template, you set the template property to the new control template
+    of the control
+    
+    To display the text in a button, you set the content property.
+    Content is a property of ContentControl
+    You can set content different ways
+    <Button Content="Hello"> or xaml shortcut <Button>Hello</Button>
+    
+    Whatever is set as the content can be presented through a <ContentPresenter>, which is what the template does.
+    The template automatically binds the control's Content property to the ContentPresenter
+    
+    DataTemplate
+    DataTemplate is about the presentation of data
+    ContentControl and ItemsControl have a DataTemplate property
+    public ContentControl.ContentTemplate
+    public ItemsControl.ItemTemplate
+    
+    -->
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" HorizontalAlignment="Left" Orientation="Horizontal" >
+            <StackPanel.Resources>
+                <ControlTemplate x:Key="roundButton1" TargetType="Button">
+                    <Grid>
+                        <Ellipse x:Name="backgroundElement" 
+                                 Fill="{TemplateBinding Background}" 
+                                 Stroke="{TemplateBinding Foreground}" />
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Fill" TargetName="backgroundElement" Value="AliceBlue"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+                
+                <!--Instead of using triggers, you can use Visual States
+                You can animate property changes based on the current state of the control
+                Remove triggers and add VisualStateManager.VisualStateGroups
+                You can have animatiosn for each visual state
+                -->
+
+                <ControlTemplate x:Key="roundButton2" TargetType="Button">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="backgroundElement" 
+                                                        Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                        To="{TemplateBinding Background}"
+                                                        Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="backgroundElement"
+                                                        Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" 
+                                                        To="Yellow"
+                                                        Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Ellipse x:Name="backgroundElement" 
+                                 Fill="{TemplateBinding Background}" 
+                                 Stroke="{TemplateBinding Foreground}" />
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Grid>
+                </ControlTemplate>
+
+            </StackPanel.Resources>
+            <Button Grid.Row="0" Width="100" Height="30" Content="Button1" Template="{StaticResource roundButton1}" />
+            <Button Grid.Row="0" Width="100" Height="30" Content="Button2" Template="{StaticResource roundButton2}"/>
+            <Button Grid.Row="1" Width="100" Height="30" Content="Button3" >
+                <Button.Template>
+                    <ControlTemplate>
+                        <Border Background="AliceBlue" BorderBrush="Red" BorderThickness="1" >
+                            <ContentPresenter HorizontalAlignment="Center" />                            
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
+        
+        
+        <!--DataTemplates. Also Examples of setting the DataTemplate in different ways.  Same can be applied for control template -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <DataTemplate x:Key="ListBoxDataTemplate">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Name}" />
+                        <TextBlock Text="{Binding Path=Age}"/>
+                    </StackPanel>
+                </DataTemplate>
+                
+                <!--Setting a style using datatemplate as resource -->
+                <Style x:Key="ListBoxStyle1" TargetType="ItemsControl">
+                    <Setter Property="ItemTemplate"  Value="{StaticResource ListBoxDataTemplate}"/>
+                </Style>
+
+                <!--Setting a style using datatemplate inline -->
+                <Style x:Key="ListBoxStyle2" TargetType="ItemsControl">
+                    <Setter Property="ItemTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Path=Age}" />
+                                    <TextBlock Text="{Binding Path=Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>                    
+                </Style>
+                
+            </Grid.Resources>
+
+            <!--Set ItemTemplate using a resource /> -->
+            <ListBox Grid.Column="0"                      
+                     HorizontalAlignment="Stretch" 
+                     Margin="5"
+                     ItemsSource="{Binding EmpList}"
+                     ItemTemplate="{StaticResource ListBoxDataTemplate}">                
+            </ListBox>
+
+            <!--Set ItemTemplate using a Style /> -->
+            <ListBox Grid.Column="1"                     
+                     HorizontalAlignment="Stretch" 
+                     Margin="5"
+                     ItemsSource="{Binding EmpList}"
+                     Style="{StaticResource ListBoxStyle1}">
+            </ListBox>
+
+            <!--Set ItemTemplate using a Style /> -->
+            <ListBox Grid.Column="2"                     
+                     HorizontalAlignment="Stretch" 
+                     Margin="5"
+                     ItemsSource="{Binding EmpList}"
+                     Style="{StaticResource ListBoxStyle2}">
+            </ListBox>
+        </Grid>
+        
+        
         
     </Grid>
+
 </Window>

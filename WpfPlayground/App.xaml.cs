@@ -36,7 +36,7 @@ namespace WpfPlayground
                 }
             }
 
-            new DragAndDrop.DragAndDrop().Show();
+            new Templates.ControlTemplates.ControlTemplate01().Show();
 
             //wpfnewtechniques has startup code
 
