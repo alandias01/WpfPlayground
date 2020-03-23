@@ -1,0 +1,105 @@
+﻿<Window x:Class="WpfPlayground.Binding.MarkupExtensions"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPlayground.Binding"
+        mc:Ignorable="d"        
+        Title="MarkupExtensions" Height="300" Width="400" >
+    
+    
+    <!-- You can set ViewModel in different ways 
+    If you put VMLocator in app resources, then you can put it in Window
+    <Window DataContext="{Binding Source={StaticResource VMLocator}, Path=MarkUpVM}" > </Window>
+    -->
+    
+    <!-- Other ways-->
+    
+    <!--<Window.Resources>
+        <local:ViewModelLocator x:Key="VMLocator" />
+    </Window.Resources>
+    <Window.DataContext>
+        <Binding Source="{StaticResource VMLocator}" Path="MarkUpVM" />
+    </Window.DataContext>-->
+
+    <Window.DataContext>
+        <local:MarkupExtensionsVM />
+    </Window.DataContext>
+    
+    
+    <!-- 
+    The xaml parser can interpret an attribute value as a literal string or convert it to an object.
+    The startpoint attribute takes in a type of point but in xaml, you can put a string.  The reason this is possible is
+    because of type converters.  
+    Type converter will see this string and create a new object of type Point
+    
+    <LinearGradientBrush x:Key="aa" StartPoint="1,2" />
+    
+    var linearGradientBrush = new LinearGradientBrush();
+    linearGradientBrush.StartPoint = new Point(1, 2);
+    
+    Some times you don't want to create a new object but rather reference an object that already exists.
+    You use a MarkupExtension
+    Ex.  We using the Binding Markup Extension to set the object in a viewmodel to an attribute in xaml
+    
+    You can use attribute or property element syntax
+    When using attribute syntax, the way you let the xaml processor know you are using a markup extension is by putting 
+    a curly brace after the quotes.  The token to the right of the curly brace will be taken as the Markup extension
+    <ListBox Grid.Column="1" ItemsSource="{Binding EmployeeSelectedItems}"
+    
+    x:Type
+    equivalent to TypeOf
+    Allows style to know what type you want to use
+    TragetType takes in a type
+    <Style TargetType = "{x:Type Button}">
+    
+    StaticResource & dynamic resource
+    Lets you use a resource defined in xaml
+    -->
+
+    <!-- 
+    In Enterprise level application, datacontext is set something like this    
+    We have a main window, Like a Panel Window to hold different components
+    
+    Public class MyCompanyPanel
+    {
+        public HeaderVM Headervm {get;set;}
+        public BodyVM Bodyvm {get;set;}
+    }
+    
+    <MyCompanyPanel>
+        <Header DataContext="{Binding Headervm}" /> 
+        <Body DataContext="{Binding Bodyvm}" />    
+    </MyCompanyPanel>
+    
+    -->
+    
+    <Grid ShowGridLines="True" >
+        <Grid.Resources>
+            <local:MarkupExtensionsVM x:Key="MarkupExtensionsVMResource" SetInXaml="Im Set" />
+
+        </Grid.Resources>
+
+        <Grid.RowDefinitions >
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Label Content="{x:Static local:MarkupExtensionsVM.EmpStatic}" />
+
+            <Label Content="{Binding Source={x:Static local:MarkupExtensionsVM.EmpStatic}}" />
+
+            <Label Content="{Binding EmpSingle.Name}" />
+
+            <Label Content="{Binding Source={StaticResource MarkupExtensionsVMResource}, Path=EmpSingle.Name}"/>
+
+            <Label Height="100" Content="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Height}" />
+
+            <Label Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type StackPanel}}, Path=Orientation}"/>
+
+        </StackPanel>
+
+    </Grid>
+</Window>

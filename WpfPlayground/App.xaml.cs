@@ -36,7 +36,7 @@ namespace WpfPlayground
                 }
             }
 
-            new Templates.ControlTemplates.ControlTemplate01().Show();
+            new Binding.MarkupExtensions().Show();
 
             //wpfnewtechniques has startup code
 
@@ -64,4 +64,6 @@ namespace WpfPlayground
 
         }
     }
+
+
 }
