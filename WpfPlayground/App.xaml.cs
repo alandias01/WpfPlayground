@@ -36,7 +36,7 @@ namespace WpfPlayground
                 }
             }
 
-            new Style.Style01().Show(); 
+            new Templates.ControlTemplates.DataGridTemplating().Show();
 
             //wpfnewtechniques has startup code
 
