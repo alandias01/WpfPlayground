@@ -36,7 +36,7 @@ namespace WpfPlayground
                 }
             }
 
-            new Binding.MasterDetail().Show(); 
+            new Style.Style01().Show(); 
 
             //wpfnewtechniques has startup code
 
