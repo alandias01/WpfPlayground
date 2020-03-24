@@ -1,5 +1,4 @@
-﻿using Prism.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -7,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using WpfPlayground.DependencyInjection;
+using Prism.Events;
+using Unity;
 using Unity.Lifetime;
 
 namespace WpfPlayground
@@ -28,6 +29,8 @@ namespace WpfPlayground
             app.run(w)
             */
 
+            UnityManager.container.RegisterType<IEventAggregator, EventAggregator>(new ContainerControlledLifetimeManager());
+
             //This checks for arguments
             if (e.Args.Length > 0)
             {
@@ -36,13 +39,10 @@ namespace WpfPlayground
                 }
             }
 
-            new Templates.ControlTemplates.DataGridTemplating().Show();
+            new DependencyInjection.EventAggregatorWindow().Show();
 
             //wpfnewtechniques has startup code
-
-            //Setup unity, then use the event aggregator
-            //UnityManager.container.RegisterType<IEventAggregator, EventAggregator>();
-
+                        
             //you can get access to the current application instance from anywhere
             //using application.current
 
@@ -64,6 +64,4 @@ namespace WpfPlayground
 
         }
     }
-
-
 }
