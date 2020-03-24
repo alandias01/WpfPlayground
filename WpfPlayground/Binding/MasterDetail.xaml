@@ -1,0 +1,33 @@
+﻿<Window x:Class="WpfPlayground.Binding.MasterDetail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPlayground.Binding"
+        mc:Ignorable="d"
+        Title="MasterDetail" Height="300" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />            
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Grid.Row="0" Grid.Column="0" ItemsSource="{Binding EmpList}" x:Name="DG1" Margin="5"/>
+
+        <StackPanel Grid.Row="0" Grid.Column="1" DataContext="{Binding ElementName=DG1, Path=SelectedItem}" Margin="5">
+            <TextBlock Text="{Binding Name}"/>
+            <TextBlock Text="{Binding Age}"/>
+        </StackPanel>
+
+        <!--IsSynchronizedWithCurrentItem
+        When you select an item in left grid, it gets selected in the right grid.  Both have SelectedItem equal to each other        
+        -->
+
+        <DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding EmpList}" Margin="5" IsSynchronizedWithCurrentItem="True"/>
+        <DataGrid Grid.Row="1" Grid.Column="1" ItemsSource="{Binding EmpList}" Margin="5" IsSynchronizedWithCurrentItem="True"/>
+    </Grid>
+</Window>

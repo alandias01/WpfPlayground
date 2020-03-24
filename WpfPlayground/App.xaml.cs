@@ -36,7 +36,7 @@ namespace WpfPlayground
                 }
             }
 
-            new Binding.MarkupExtensions().Show();
+            new Binding.MasterDetail().Show(); 
 
             //wpfnewtechniques has startup code
 
