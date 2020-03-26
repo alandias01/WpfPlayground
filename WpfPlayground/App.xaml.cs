@@ -39,7 +39,7 @@ namespace WpfPlayground
                 }
             }
 
-            new DependencyInjection.EventAggregatorWindow().Show();
+            new Multithreading.AsyncAwait01().Show();
 
             //wpfnewtechniques has startup code
                         

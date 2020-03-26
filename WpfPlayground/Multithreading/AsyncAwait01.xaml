@@ -1,0 +1,35 @@
+﻿<Window x:Class="WpfPlayground.Multithreading.AsyncAwait01"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPlayground.Multithreading"
+        mc:Ignorable="d"
+        Title="AsyncAwait01" Height="300" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"  />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />            
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+            <Button Margin="5" Padding="5" Content="Fetch" Command="{Binding Button01Command}" />
+            <Button Margin="5" Padding="5" Content="Cancel" Command="{Binding Button01CancelCommand}" />            
+        </StackPanel>
+        
+        
+        <TextBlock Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding TextBlock1Text}" />
+
+        <Button Grid.Row="1" Grid.Column="0" Margin="5" Content="Button2" Command="{Binding Button02Command}" />
+        <TextBlock Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding TextBlock2Text}" />
+
+        <Button Grid.Row="2" Grid.Column="0" Margin="5" Content="Button3" Command="{Binding Button03Command}" />
+        <TextBlock Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding TextBlock3Text}" />
+    </Grid>
+</Window>

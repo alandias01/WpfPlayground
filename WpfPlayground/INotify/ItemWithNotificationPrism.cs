@@ -9,11 +9,7 @@ namespace WpfPlayground.INotify
         public string Name
         {
             get => name;
-            set
-            {
-                name = value;  //may not need this line
-                this.SetProperty(ref name, value);
-            }
+            set => this.SetProperty(ref name, value);            
         }
     }
 }
