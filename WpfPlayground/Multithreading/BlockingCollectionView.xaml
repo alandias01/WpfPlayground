@@ -1,0 +1,23 @@
+﻿<Window x:Class="WpfPlayground.Multithreading.BlockingCollectionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPlayground.Multithreading"
+        mc:Ignorable="d"
+        Title="BlockingCollectionView" Height="100" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />                      
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="AddAllToQueueButton" Grid.Row="0" Grid.Column="0" Margin="10" Content="Add all to Queue" Click="AddAllToQueueButton_Click" />
+        <Button x:Name="EnqueueButton" Grid.Row="0" Grid.Column="1" Margin="10" Content="Enqueue" Click="EnqueueButton_Click" />
+        <Button x:Name="DeQueueButton" Grid.Row="0" Grid.Column="2" Margin="10" Content="DeQueue" Click="DeQueueButton_Click" />
+    </Grid>
+</Window>
