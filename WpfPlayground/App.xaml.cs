@@ -39,7 +39,7 @@ namespace WpfPlayground
                 }
             }
 
-            new Multithreading.BlockingCollectionView().Show();
+            new Multithreading.ProducerConsumer01();
 
             //wpfnewtechniques has startup code
                         
