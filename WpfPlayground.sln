@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfPlayground", "WpfPlaygro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfUtilities", "..\WpfUtilities\WpfUtilities\WpfUtilities.csproj", "{A982B889-0398-41DB-A5C9-B189C3491163}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfPlayground.Tests", "WpfPlayground.Tests\WpfPlayground.Tests.csproj", "{DFEBCDB5-F1B8-41B2-AE0C-6F543405BDF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{A982B889-0398-41DB-A5C9-B189C3491163}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A982B889-0398-41DB-A5C9-B189C3491163}.Release|x64.ActiveCfg = Release|Any CPU
 		{A982B889-0398-41DB-A5C9-B189C3491163}.Release|x64.Build.0 = Release|Any CPU
+		{DFEBCDB5-F1B8-41B2-AE0C-6F543405BDF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFEBCDB5-F1B8-41B2-AE0C-6F543405BDF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFEBCDB5-F1B8-41B2-AE0C-6F543405BDF4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DFEBCDB5-F1B8-41B2-AE0C-6F543405BDF4}.Debug|x64.Build.0 = Debug|Any CPU
+		{DFEBCDB5-F1B8-41B2-AE0C-6F543405BDF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFEBCDB5-F1B8-41B2-AE0C-6F543405BDF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFEBCDB5-F1B8-41B2-AE0C-6F543405BDF4}.Release|x64.ActiveCfg = Release|Any CPU
+		{DFEBCDB5-F1B8-41B2-AE0C-6F543405BDF4}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
