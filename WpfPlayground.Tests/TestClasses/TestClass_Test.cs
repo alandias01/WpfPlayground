@@ -112,20 +112,33 @@ namespace WpfPlayground.Tests.TestClasses
         [Test]
         [Category("AlanCategory")]
         [Ignore("Because I felt like it")]
-        public void MultTwoNumbers_ValidInputs_ReturnGoodValue()
-        {
-            //Arrange
-            
-            //Act
-            var result = sut.DivTwoNumbers(8, 4);
-
-            //Assert
-            Assert.That(result, Is.EqualTo(2));
+        [TestCase(1, 2, 2)]
+        [TestCase(2, 4, 8)]
+        public void DivTwoNumbers_ValidInputs_ReturnGoodValue(int x, int y, int expectedResult)
+        {            
+            var result = sut.DivTwoNumbers(8, 4);                        
+            Assert.That(result, Is.EqualTo(expectedResult));            
         }
 
         [Test]
         [Category("AlanCategory")]
-        [Ignore("Because I felt like it")]
-        public void TestAttr() { }        
+        [TestCase(2, 1, ExpectedResult = 2)]
+        [TestCase(8, 2, ExpectedResult = 4)]
+        //[TestCaseSource(typeof(ClassThatGetsData), "TestCases")]    //Create a class with public static IEnumerable TestCases {yiled return ...
+        public int DivTwoNumbers_ValidInputs_ReturnGoodValue2(int x, int y)
+        {
+            var result = sut.DivTwoNumbers(x, y);
+            //Assert.That(result, Is.EqualTo(2));   //We remove this
+            return result;
+        }
+
+        //Combinatorial test to see if exceptions are thrown
+        //You can specify values or a range.  Range(4,6,1) means from 4 to 6 incremented by 1
+        [Test]
+        //[Sequential] Instead of 9 tests, only three.  Doesnt do combinations
+        public void DivTwoNumbers_CombinatorialTests([Values(1, 2, 3)]int x, [Range(4, 6, 1)]int y) => sut.DivTwoNumbers(x, y);
+
+        [Test][Sequential]
+        public void DivTwoNumbers_SequentialTests([Values(2, 10, 20)]int x, [Values(1, 2, 4)]int y, [Values(2, 5, 5)]int expResult) => Assert.That(sut.DivTwoNumbers(x, y), Is.EqualTo(expResult));        
     }
 }
