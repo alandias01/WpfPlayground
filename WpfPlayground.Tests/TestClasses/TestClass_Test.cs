@@ -1,4 +1,6 @@
-﻿using Moq;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
+using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -109,6 +111,54 @@ namespace WpfPlayground.Tests.TestClasses
             Assert.That(sut.TestingMethodsList, Has.No.One.EqualTo(new TestClass(6)));
             
             //Assert.That(, );
+        }
+
+        [Test]
+        public void BasicsFluent()
+        {
+            sut.DoubleValue = 1.0 / 3.0;
+            sut.TestingMethodsList = Enumerable.Range(0, 5).Select(x => new TestClass(x)).ToList();
+            sut.Years = 2;
+
+
+            //have property
+            sut.Years.Should().Be(2);
+            sut.Name.Should().NotBeNull();
+            sut.Name.Should().BeOfType(typeof(string));
+            sut.Name.Should().Contain("Alan");  //.StartWith(), .Match("*n"),  .MatchRegex("[A-Z]{4}")            
+            sut.DoubleValue.Should().BeApproximately(.33, .004);
+
+            Action act = () => sut.MethodThrowException();
+            act.Should().Throw<Exception>();
+
+            sut.TestingMethodsList.Should().HaveCount(5);
+            sut.TestingMethodsList.Should().HaveCountGreaterThan(3);
+            sut.TestingMethodsList.Should().NotBeNullOrEmpty();
+
+            //AssertionScope is if a test fails, it will keep going and at end you can get a list of failed tests
+            using (new AssertionScope())
+            {
+                sut.TestingMethodsList.Should().OnlyHaveUniqueItems();
+                sut.TestingMethodsList.Should().Contain(new TestClass(1));
+            }
+            sut.TestingMethodsList.Should().ContainItemsAssignableTo<ITestClass>();
+
+            //You can assert on methods and properties
+            typeof(TestClass).Methods().ThatArePublicOrInternal.ThatReturn<int>().Should().NotBeVirtual();
+
+
+            //Events
+
+            //Special built in feature for MVVM
+            //subject.Should().Raise().PropertyChangeFor(x => x.SomeProperty);
+
+            //TEST THAT AN EVENT WAS RAISED
+            //var subject = new EditCustomerViewModel();
+            //using (var monitoredSubject = subject.Monitor())
+            //{
+            //    subject.Foo();
+            //    monitoredSubject.Should().Raise("NameChangedEvent");
+            //}
         }
 
         [Test]

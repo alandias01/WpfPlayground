@@ -23,7 +23,10 @@ namespace WpfPlayground.TestClasses
         string Name { get; set; }
         int Years { get; set; }
 
-        int DivTwoNumbers(int x, int y);        
+        
+        int DivTwoNumbers(int x, int y);
+        int DivTwoNumbersDependsOnService(int x, int y);
+        void MethodThrowException();
     }
 
     public class TestClass : IEquatable<TestClass>, ITestClass
@@ -83,6 +86,14 @@ namespace WpfPlayground.TestClasses
             }
             
             return z;
+        }
+
+        public void MethodThrowException()
+        {
+            if (this.Years > 1)
+            {
+                throw new Exception("Exception thrown");
+            }
         }
 
         public bool Equals([AllowNull] TestClass other) => this.Years.Equals(other.Years);
