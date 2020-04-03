@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Moq;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,8 +70,9 @@ namespace WpfPlayground.Tests.TestClasses
             sut.DoubleValue = 1.0 / 3.0;
             sut.TestingMethodsList = Enumerable.Range(0, 5).Select(x => new TestClass(x)).ToList();
             TestClass sut2 = sut;
-            
+
             //Assert
+            Assert.That(sut, Has.Property("Years"));
             Assert.That(sut.Years, Is.EqualTo(1));  //If constructor set this value
             Assert.That(sut.Years, Is.Not.EqualTo(2));  //If constructor set this value
             Assert.That(sut.Years, Is.GreaterThan(0));  //If constructor set this value
@@ -139,6 +141,50 @@ namespace WpfPlayground.Tests.TestClasses
         public void DivTwoNumbers_CombinatorialTests([Values(1, 2, 3)]int x, [Range(4, 6, 1)]int y) => sut.DivTwoNumbers(x, y);
 
         [Test][Sequential]
-        public void DivTwoNumbers_SequentialTests([Values(2, 10, 20)]int x, [Values(1, 2, 4)]int y, [Values(2, 5, 5)]int expResult) => Assert.That(sut.DivTwoNumbers(x, y), Is.EqualTo(expResult));        
+        public void DivTwoNumbers_SequentialTests([Values(2, 10, 20)]int x, [Values(1, 2, 4)]int y, [Values(2, 5, 5)]int expResult) => Assert.That(sut.DivTwoNumbers(x, y), Is.EqualTo(expResult));
+        
+        [Test]
+        public void MockTests()
+        {
+            var mockService = new Mock<IService>();
+
+            //We can setup all properties to be accessed. Must be done after creating mock and before any subsequent code
+            //mockService.SetupAllProperties();
+
+            var sutWithService = new TestClass(mockService.Object);
+
+            mockService.Setup(x => x.Validate()).Returns(true);
+            mockService.Setup(x => x.ValidateWithArgs(It.IsAny<int>(), It.IsAny<int>())).Returns(true);
+            mockService.Setup(x => x.SomeValue).Returns(11);
+
+            //This is an interface with no implementation but in the TestClass code, we do this._service.Count++;
+            //To make this incremented, we do SetupProperty
+            mockService.SetupProperty(x => x.Count);
+            //mockService.SetupProperty(x => x.Count, 3);  //We can also set an initial value
+
+
+            Assert.That(sutWithService.DivTwoNumbersDependsOnService(6,2), Is.EqualTo(3));
+            Assert.That(sutWithService.Years, Is.EqualTo(15));
+            Assert.That(mockService.Object.Count, Is.EqualTo(1));
+
+            /* BEHAVIOR TESTING
+             * Verify Method was called (w/ args) or certain number of times
+             * Verify Property setters and getters were called and set
+             * No other calls were made
+             */
+
+            mockService.Verify(x => x.Validate());
+            mockService.Verify(x => x.ValidateWithArgs(It.IsAny<int>(), It.IsAny<int>()), Times.Once);
+            
+            mockService.VerifyGet(foo => foo.SomeValue);    // Verify getter invocation, regardless of value.
+            mockService.VerifySet(foo => foo.SomeValue = It.IsAny<int>());  // Verify setter called with specific value            
+            mockService.VerifySet(foo => foo.SomeValue = It.IsInRange(1, 5, Moq.Range.Inclusive));  // Verify setter with an argument matcher
+
+            //mockService.Setup(x => x.Validate()).Throws<InvalidOperationException>();
+            //Assert.That(sutWithService.DivTwoNumbersDependsOnService(6, 2), Throws.Exception.TypeOf<InvalidOperationException>());
+
+            //Manually raises the event
+            mockService.Raise(x => x.ValidateHappened += null, new ResolveEventArgs("args"));            
+        }
     }
 }
