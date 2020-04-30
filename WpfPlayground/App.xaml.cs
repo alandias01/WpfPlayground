@@ -39,8 +39,7 @@ namespace WpfPlayground
                 }
             }
 
-            new Networking.ChatClient.ChatView().Show();
-            //new Networking.BasicMessaging();
+            new PaneWindow.RandomWindowForPane().Show();
 
             //wpfnewtechniques has startup code
                         
