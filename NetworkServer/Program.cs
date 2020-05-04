@@ -6,7 +6,8 @@ namespace NetworkServer
     {
         static void Main(string[] args)
         {
-            new BasicMessagingListener();
+            new ChatServer.ChatListener().StartServer().Wait();
+            //new BasicMessagingListener();
         }
     }
 }

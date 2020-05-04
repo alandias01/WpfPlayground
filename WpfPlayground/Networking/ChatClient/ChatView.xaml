@@ -1,0 +1,46 @@
+﻿<Window x:Class="WpfPlayground.Networking.ChatClient.ChatView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPlayground.Networking.ChatClient"
+        mc:Ignorable="d"
+        Title="ChatView" Height="700" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Label Content="Server:" />
+            <TextBox Width="100" Margin="5" Text="{Binding ServerIp}"/>
+
+            <Label Content="Port:" />
+            <TextBox Width="100" Margin="5" Text="{Binding ServerPort}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Label Content="From:" />
+            <TextBox Width="100" Margin="5" Text="{Binding FromUser}"/>
+
+            <Label Content="To:" />
+            <TextBox Width="100" Margin="5" Text="{Binding ToUser}"/>
+        </StackPanel>
+
+        <TextBox Grid.Row="2" Text="{Binding ChatMessage}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="5" />
+
+        <StackPanel Grid.Row="3"  Orientation="Horizontal">
+            <Button x:Name="btnConnect" Content="Connect" Click="btnConnect_Click" Width="70" Height="30" Margin="5"/>
+            <Button x:Name="btnDisconnect" Content="Disconnect" Click="btnDisconnect_Click" Width="70" Height="30" Margin="5"/>
+            <Button x:Name="btnSend" Content="Send" Click="btnSend_Click" Width="70" Height="30" Margin="5"/>
+        </StackPanel>
+
+        <TextBox x:Name="txtbxChatWindow" Grid.Row="4" Text="{Binding ChatWindow}" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="5" />
+
+        <TextBox x:Name="txtbxLogWindow" Grid.Row="5" Text="{Binding LogWindow}" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="5" />
+    </Grid>
+</Window>
