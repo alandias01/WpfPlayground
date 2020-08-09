@@ -1,0 +1,6 @@
+Create Main window, panelManager to keep track of panels open
+
+Buttons with commands
+
+View, VM, model
+When window closes, disposes viewmodels and models
