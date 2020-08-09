@@ -1,0 +1,21 @@
+﻿<Window x:Class="WpfPlayground.Practice202108.Practice202108"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPlayground.Practice202108"
+        mc:Ignorable="d"
+        Title="Practice202108" Height="350" Width="600">
+    <Window.DataContext>
+        <local:Practice202108ViewModel />
+    </Window.DataContext>
+    <Grid>
+        <DockPanel >
+            <Menu DockPanel.Dock="Top" >
+                <MenuItem Header="File" />
+            </Menu>
+            <local:Left DockPanel.Dock="Left" />
+            <UserControl Content="{Binding MainAreaViewModel}" />
+        </DockPanel>        
+    </Grid>
+</Window>
