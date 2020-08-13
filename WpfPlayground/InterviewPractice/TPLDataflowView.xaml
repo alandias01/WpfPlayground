@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="tpl" />
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBox x:Name="txtbxOutput" Text="{Binding Output}" IsReadOnly="True" TextWrapping="Wrap" BorderThickness="0" />
     </Grid>
 </UserControl>

@@ -37,7 +37,7 @@
             <MenuItem Header="View" />
         </Menu>
         <local:LeftMenu DockPanel.Dock="Left" />
-        <UserControl Content="{Binding MainAreaViewModel}" Margin="15"/>
+        <UserControl Content="{Binding MainAreaViewModel}" Margin="10" />
     </DockPanel>
 
 </Window>
