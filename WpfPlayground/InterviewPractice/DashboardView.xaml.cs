@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace WpfPlayground.InterviewPractice
 {
-    /// <summary>
-    /// Interaction logic for DashboardView.xaml
-    /// </summary>
     public partial class DashboardView : UserControl
     {
         public DashboardView()
@@ -26,11 +23,14 @@ namespace WpfPlayground.InterviewPractice
         }
     }
 
-    public class DashboardViewModel : BindableBase
-    {
-        public DashboardViewModel()
-        {
+    public class DashboardViewModelEventArgs : IViewModelEventArgs { }
 
+    public class DashboardViewModel : ViewModelBase<DashboardViewModelEventArgs>
+    {
+        public DashboardViewModel(DashboardViewModelEventArgs args) : base(args) => this.Start(args);
+        
+        public override void Start(DashboardViewModelEventArgs arg)
+        {
         }
     }
 }

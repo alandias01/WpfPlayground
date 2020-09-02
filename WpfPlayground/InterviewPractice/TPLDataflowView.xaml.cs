@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace WpfPlayground.InterviewPractice
 {
-    /// <summary>
-    /// Interaction logic for TPLDataflowView.xaml
-    /// </summary>
     public partial class TPLDataflowView : UserControl
     {
         public TPLDataflowView()
@@ -27,15 +24,32 @@ namespace WpfPlayground.InterviewPractice
         }
     }
 
-    public class TPLDataflowViewModel : BindableBase
+    public class TPLDataflowViewModelEventArgs : IViewModelEventArgs { }
+
+    public class TPLDataflowViewModel : ViewModelBase<TPLDataflowViewModelEventArgs>
     {
         private string output;
 
-        public string Output { get => output; set => this.SetProperty(ref output, value); }
-        public TPLDataflowViewModel()
+        public TPLDataflowViewModel(TPLDataflowViewModelEventArgs args) : base(args) => this.Start(args);
+
+        public override void Start(TPLDataflowViewModelEventArgs arg)
         {
             this.Output = "Hello";
-            //var ablock = new ActionBlock<int>(input => Console.WriteLine(input));
+            var ablock = new ActionBlock<string>(ABlockFunc);
+            ablock.Post(" Hi");
         }
+
+        public string Output { get => output; set => this.SetProperty(ref output, value); }
+
+        private void ABlockFunc(string input)
+        {
+            Output += input;
+        }
+
+        /* PCQ
+         * Create a list of data items to process
+         * Create a process that works on the data that takes x time
+         * 
+         */
     }
 }

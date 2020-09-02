@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfPlayground.InterviewPractice.Algorithms;
 
 namespace WpfPlayground.InterviewPractice
 {
@@ -35,24 +36,34 @@ namespace WpfPlayground.InterviewPractice
         public BindableBase MainAreaViewModel { get => mainAreaViewModel; set => this.SetProperty(ref mainAreaViewModel, value); }
         public DelegateCommand ShowStockDashboardCommand { get; set; }
         public DelegateCommand RunTPLDataflowCommand { get; set; }
+        public DelegateCommand RunQuicksortCommand { get; set; }
 
         public InterviewMainWindowViewModel()
         {
             this.ShowStockDashboardCommand = new DelegateCommand(ShowStockDashboard);
             this.RunTPLDataflowCommand = new DelegateCommand(RunTPLDataflow);
+            this.RunQuicksortCommand = new DelegateCommand(RunAlgorithms);
         }
 
         private void ShowStockDashboard()
         {
-            this.SetMainAreaViewModel<DashboardViewModel>();
+            var args = new DashboardViewModelEventArgs();
+            this.SetMainAreaViewModel<DashboardViewModel, DashboardViewModelEventArgs>(args);
         }
 
         private void RunTPLDataflow()
         {
-            this.SetMainAreaViewModel<TPLDataflowViewModel>();
+            var args = new TPLDataflowViewModelEventArgs();
+            this.SetMainAreaViewModel<TPLDataflowViewModel, TPLDataflowViewModelEventArgs>(args);
         }
 
-        private void SetMainAreaViewModel<T>() where T : BindableBase, new()
+        private void RunAlgorithms()
+        {
+            var args = new AlgorithmsViewModelEventArgs(AlgorithmsViewModelEventArgsEnum.quickSort);
+            this.SetMainAreaViewModel<AlgorithmsViewModel, AlgorithmsViewModelEventArgs>(args);
+        }
+
+        private void SetMainAreaViewModel<T, U>(U args) where T : ViewModelBase<U> where U : IViewModelEventArgs
         {
             var vm = this.MainAreaViewModel as T;
             if (vm == null)
@@ -64,10 +75,14 @@ namespace WpfPlayground.InterviewPractice
                 }
                 else
                 {
-                    var newVM = new T();
+                    var newVM = (T)Activator.CreateInstance(typeof(T), args);
                     this.MainAreaViewModel = newVM;
                     this.viewmodels.Add(newVM);
                 }
+            }
+            else
+            {
+                vm.Start(args);
             }
         }
     }
