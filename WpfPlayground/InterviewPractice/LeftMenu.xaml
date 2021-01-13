@@ -44,6 +44,11 @@
                             <MouseBinding Command="{Binding RunTPLDataflowCommand}" MouseAction="LeftClick" />
                         </TextBlock.InputBindings>
                     </TextBlock>
+                    <TextBlock Text="Producer Consumer" Padding="25 5">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding RunProducerConsumerCommand}" MouseAction="LeftClick" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
                 </StackPanel>
             </Expander>
 

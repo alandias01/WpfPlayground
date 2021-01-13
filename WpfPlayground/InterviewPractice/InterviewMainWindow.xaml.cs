@@ -36,6 +36,7 @@ namespace WpfPlayground.InterviewPractice
         public BindableBase MainAreaViewModel { get => mainAreaViewModel; set => this.SetProperty(ref mainAreaViewModel, value); }
         public DelegateCommand ShowStockDashboardCommand { get; set; }
         public DelegateCommand RunTPLDataflowCommand { get; set; }
+        public DelegateCommand RunProducerConsumerCommand { get; set; }
         public DelegateCommand RunAlgoProblemsCommand { get; set; }
         public DelegateCommand RunQuicksortCommand { get; set; }
         public DelegateCommand RunBinarySearchCommand { get; set; }
@@ -48,6 +49,7 @@ namespace WpfPlayground.InterviewPractice
             this.RunTPLDataflowCommand = new DelegateCommand(RunTPLDataflow);
             this.RunAlgoProblemsCommand = new DelegateCommand(RunAlgoProblems);
             this.RunQuicksortCommand = new DelegateCommand(RunQuickSort);
+            this.RunProducerConsumerCommand = new DelegateCommand(RunConcurrency);            
             this.RunBinarySearchCommand = new DelegateCommand(RunBinarySearch);
             this.RunBubbleSortCommand = new DelegateCommand(RunBubbleSort);
             this.RunGraphCommand = new DelegateCommand(RunGraph);
@@ -70,6 +72,12 @@ namespace WpfPlayground.InterviewPractice
         private void RunBinarySearch() => this.RunAlgorithms(AlgorithmsViewModelEventArgsEnum.binarySearch);
         private void RunBubbleSort() => this.RunAlgorithms(AlgorithmsViewModelEventArgsEnum.bubbleSort);
         private void RunGraph() => this.RunAlgorithms(AlgorithmsViewModelEventArgsEnum.graph);
+
+        private void RunConcurrency()
+        {
+            var args = new ConcurrencyViewModelEventArgs(ConcurrencyViewModelEventArgsEnum.ProducerConsumer);
+            this.SetMainAreaViewModel<ConcurrencyViewModel, ConcurrencyViewModelEventArgs>(args);
+        }
 
         private void RunAlgorithms(AlgorithmsViewModelEventArgsEnum eventArgsEnum)
         {
