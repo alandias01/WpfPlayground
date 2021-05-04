@@ -63,6 +63,11 @@
                             <MouseBinding Command="{Binding RunQuicksortCommand}" CommandParameter="" MouseAction="LeftClick" />
                         </TextBlock.InputBindings>
                     </TextBlock>
+                    <TextBlock Text="Binary Search" Padding="25 5">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding RunBinarySearchCommand}" CommandParameter="" MouseAction="LeftClick" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
                 </StackPanel>
             </Expander>
 
