@@ -42,7 +42,7 @@ namespace WpfPlayground.InterviewPractice
         {
             this.ShowStockDashboardCommand = new DelegateCommand(ShowStockDashboard);
             this.RunTPLDataflowCommand = new DelegateCommand(RunTPLDataflow);
-            this.RunQuicksortCommand = new DelegateCommand(RunAlgorithms);
+            this.RunQuicksortCommand = new DelegateCommand(RunQuickSort);
         }
 
         private void ShowStockDashboard()
@@ -57,9 +57,11 @@ namespace WpfPlayground.InterviewPractice
             this.SetMainAreaViewModel<TPLDataflowViewModel, TPLDataflowViewModelEventArgs>(args);
         }
 
-        private void RunAlgorithms()
+        private void RunQuickSort() => this.RunAlgorithms(AlgorithmsViewModelEventArgsEnum.quickSort);
+
+        private void RunAlgorithms(AlgorithmsViewModelEventArgsEnum eventArgsEnum)
         {
-            var args = new AlgorithmsViewModelEventArgs(AlgorithmsViewModelEventArgsEnum.quickSort);
+            var args = new AlgorithmsViewModelEventArgs(eventArgsEnum);
             this.SetMainAreaViewModel<AlgorithmsViewModel, AlgorithmsViewModelEventArgs>(args);
         }
 
