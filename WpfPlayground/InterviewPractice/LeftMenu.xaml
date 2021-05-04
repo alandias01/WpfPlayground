@@ -68,6 +68,11 @@
                             <MouseBinding Command="{Binding RunBinarySearchCommand}" CommandParameter="" MouseAction="LeftClick" />
                         </TextBlock.InputBindings>
                     </TextBlock>
+                    <TextBlock Text="Bubble Sort" Padding="25 5">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding RunBubbleSortCommand}" CommandParameter="" MouseAction="LeftClick" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
                 </StackPanel>
             </Expander>
 
