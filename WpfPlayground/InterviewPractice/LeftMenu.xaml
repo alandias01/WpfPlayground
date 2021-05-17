@@ -78,6 +78,11 @@
                             <MouseBinding Command="{Binding RunBubbleSortCommand}" CommandParameter="" MouseAction="LeftClick" />
                         </TextBlock.InputBindings>
                     </TextBlock>
+                    <TextBlock Text="Graph" Padding="25 5">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding RunGraphCommand}" CommandParameter="" MouseAction="LeftClick" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
                 </StackPanel>
             </Expander>
 

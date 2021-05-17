@@ -40,7 +40,8 @@ namespace WpfPlayground.InterviewPractice
         public DelegateCommand RunQuicksortCommand { get; set; }
         public DelegateCommand RunBinarySearchCommand { get; set; }
         public DelegateCommand RunBubbleSortCommand { get; set; }
-
+        public DelegateCommand RunGraphCommand { get; set; }
+        
         public InterviewMainWindowViewModel()
         {
             this.ShowStockDashboardCommand = new DelegateCommand(ShowStockDashboard);
@@ -49,6 +50,7 @@ namespace WpfPlayground.InterviewPractice
             this.RunQuicksortCommand = new DelegateCommand(RunQuickSort);
             this.RunBinarySearchCommand = new DelegateCommand(RunBinarySearch);
             this.RunBubbleSortCommand = new DelegateCommand(RunBubbleSort);
+            this.RunGraphCommand = new DelegateCommand(RunGraph);
         }
 
         private void ShowStockDashboard()
@@ -67,6 +69,7 @@ namespace WpfPlayground.InterviewPractice
         private void RunQuickSort() => this.RunAlgorithms(AlgorithmsViewModelEventArgsEnum.quickSort);
         private void RunBinarySearch() => this.RunAlgorithms(AlgorithmsViewModelEventArgsEnum.binarySearch);
         private void RunBubbleSort() => this.RunAlgorithms(AlgorithmsViewModelEventArgsEnum.bubbleSort);
+        private void RunGraph() => this.RunAlgorithms(AlgorithmsViewModelEventArgsEnum.graph);
 
         private void RunAlgorithms(AlgorithmsViewModelEventArgsEnum eventArgsEnum)
         {

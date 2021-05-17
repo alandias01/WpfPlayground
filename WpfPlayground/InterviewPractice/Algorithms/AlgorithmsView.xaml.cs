@@ -29,7 +29,8 @@ namespace WpfPlayground.InterviewPractice.Algorithms
         AlgoProblems,
         quickSort,
         binarySearch,
-        bubbleSort
+        bubbleSort,
+        graph
     }
 
 
@@ -62,6 +63,9 @@ namespace WpfPlayground.InterviewPractice.Algorithms
                     break;
                 case AlgorithmsViewModelEventArgsEnum.bubbleSort:
                     new BubbleSort();
+                    break;
+                case AlgorithmsViewModelEventArgsEnum.graph:
+                    new Graph();
                     break;
                 default:
                     new BinarySearch();
