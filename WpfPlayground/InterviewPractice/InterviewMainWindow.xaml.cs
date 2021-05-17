@@ -36,14 +36,16 @@ namespace WpfPlayground.InterviewPractice
         public BindableBase MainAreaViewModel { get => mainAreaViewModel; set => this.SetProperty(ref mainAreaViewModel, value); }
         public DelegateCommand ShowStockDashboardCommand { get; set; }
         public DelegateCommand RunTPLDataflowCommand { get; set; }
+        public DelegateCommand RunAlgoProblemsCommand { get; set; }
         public DelegateCommand RunQuicksortCommand { get; set; }
         public DelegateCommand RunBinarySearchCommand { get; set; }
-        public DelegateCommand RunBubbleSortCommand { get; set; }        
+        public DelegateCommand RunBubbleSortCommand { get; set; }
 
         public InterviewMainWindowViewModel()
         {
             this.ShowStockDashboardCommand = new DelegateCommand(ShowStockDashboard);
             this.RunTPLDataflowCommand = new DelegateCommand(RunTPLDataflow);
+            this.RunAlgoProblemsCommand = new DelegateCommand(RunAlgoProblems);
             this.RunQuicksortCommand = new DelegateCommand(RunQuickSort);
             this.RunBinarySearchCommand = new DelegateCommand(RunBinarySearch);
             this.RunBubbleSortCommand = new DelegateCommand(RunBubbleSort);
@@ -61,6 +63,7 @@ namespace WpfPlayground.InterviewPractice
             this.SetMainAreaViewModel<TPLDataflowViewModel, TPLDataflowViewModelEventArgs>(args);
         }
 
+        private void RunAlgoProblems() => this.RunAlgorithms(AlgorithmsViewModelEventArgsEnum.AlgoProblems);
         private void RunQuickSort() => this.RunAlgorithms(AlgorithmsViewModelEventArgsEnum.quickSort);
         private void RunBinarySearch() => this.RunAlgorithms(AlgorithmsViewModelEventArgsEnum.binarySearch);
         private void RunBubbleSort() => this.RunAlgorithms(AlgorithmsViewModelEventArgsEnum.bubbleSort);

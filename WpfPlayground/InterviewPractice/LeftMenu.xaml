@@ -58,6 +58,11 @@
                             </Style.Triggers>
                         </Style>
                     </StackPanel.Resources>
+                    <TextBlock Text="Algo Problems" Padding="25 5">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding RunAlgoProblemsCommand}" CommandParameter="" MouseAction="LeftClick" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
                     <TextBlock Text="Quicksort" Padding="25 5">
                         <TextBlock.InputBindings>
                             <MouseBinding Command="{Binding RunQuicksortCommand}" CommandParameter="" MouseAction="LeftClick" />

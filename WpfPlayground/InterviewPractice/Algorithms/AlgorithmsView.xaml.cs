@@ -26,6 +26,7 @@ namespace WpfPlayground.InterviewPractice.Algorithms
 
     public enum AlgorithmsViewModelEventArgsEnum
     {
+        AlgoProblems,
         quickSort,
         binarySearch,
         bubbleSort
@@ -50,6 +51,9 @@ namespace WpfPlayground.InterviewPractice.Algorithms
         {
             switch (args.AlgorithmsViewModelType)
             {
+                case AlgorithmsViewModelEventArgsEnum.AlgoProblems:
+                    new AlgoProblems();
+                    break;
                 case AlgorithmsViewModelEventArgsEnum.quickSort:
                     new Quicksort();
                     break;
