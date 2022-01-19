@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfPlayground.DesignPatterns;
 
 namespace WpfPlayground
 {
@@ -23,6 +24,11 @@ namespace WpfPlayground
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Start_Click(object sender, RoutedEventArgs e)
+        {
+            new ObservableRx();
         }
     }
 }
