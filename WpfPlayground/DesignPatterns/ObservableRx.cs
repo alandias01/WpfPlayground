@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
@@ -28,15 +29,24 @@ namespace WpfPlayground.DesignPatterns
 
     public class ObservableRx
     {
+        //private readonly IObservable<int> _source = new Observable<int>();
         public int MyPropertya { get; set; }
         public ObservableRx()
         {
             var ds = new DataService();
             ds.ExecuteAsync((msg) => {
-                Debug.WriteLine(msg);
-            
+                Debug.WriteLine(msg);            
             });            
         }
+
+        //public void Subs(IObserver<int> observer, IScheduler)
+        //{
+        //    _source
+        //        .Do(observer)
+        //        .ObserveOn()
+        //        .Subscribe(m => observer.OnNext(m), observer.OnError, observer.OnCompleted);
+
+        //}
 
         public void GetData(IObservable<int> obs)
         {

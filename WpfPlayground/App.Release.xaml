@@ -1,0 +1,3 @@
+<!--For more information on using transformations see the web.config examples at http://go.microsoft.com/fwlink/?LinkId=214134. -->
+<Application x:Class="WpfPlayground.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:WpfPlayground" xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+</Application>
