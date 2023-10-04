@@ -39,7 +39,9 @@ namespace WpfPlayground
                 }
             }
 
-            StartupUri = new Uri("MainWindow.xaml", UriKind.Relative);
+            new Playground();
+
+            //StartupUri = new Uri("MainWindow.xaml", UriKind.Relative);
             //new Networking.ChatClient.ChatView().Show();
             //new Networking.BasicMessaging();
 
