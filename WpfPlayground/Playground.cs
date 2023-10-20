@@ -8,8 +8,7 @@ namespace WpfPlayground
     public class Playground
     {
         public Playground()
-        {
-            filter1();
+        {            
         }
 
         private void FilterListByMultipleItems()
