@@ -7,34 +7,32 @@ namespace WpfPlayground
 {
     public class Playground
     {
-        public Playground()
-        {            
-        }
+        string name;
 
-        private void FilterListByMultipleItems()
+        // Property accessors sometimes are 1 liners (get) to return the result of an expression
+        // You can implement these properties as expression-bodied members
+        public string ExpressionBodyDefinitionToImplementReadOnlyProperty => name;
+
+        public string ExpressionBodyDefinitionToImplementPropertyGetSet
         {
-            /* Result has full list
-             * User enters multiple items in arr
-             * Create new List<CtpyAcct> thats filtered by items in arr
-             */
-
-            List<CtpyAcc> result = new List<CtpyAcc> {
-                new CtpyAcc { ctpy = "aa", acct = 1 }, 
-                new CtpyAcc { ctpy = "bb", acct = 2 }, 
-                new CtpyAcc { ctpy = "cc", acct = 3 },
-                new CtpyAcc { ctpy = "dd", acct = 4 },
-                new CtpyAcc { ctpy = "ee", acct = 5 }
-            };
-
-            string[] arr = { "bb", "dd" };
-
-            var filteredList = result.Where(x => arr.Any(y => y == x.ctpy));
+            get => name;
+            set => name = value;
+            //set
+            //{
+            //    name = value;
+            //}
         }
-    }
 
-    public class CtpyAcc
-    {
-        public string ctpy;
-        public int acct;
+        public string ExpressionBodyDefinitionForMember(int x) => x > 5 ? "Greater than 5" : "Less than or = to 5";
+
+        // An expression body definition for a constructor typically consists of a single assignment expression
+        // or a method call that handles the constructor's arguments or initializes instance state.
+        public Playground(string _name) => name = _name;
+        public Playground(string _name, int age) => CtorInit(_name, age);
+        public void CtorInit(string _name, int age) { }
+
+        public Playground()
+        {
+        }
     }
 }
