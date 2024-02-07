@@ -27,19 +27,7 @@ namespace WpfPlayground
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
-        {
-            //new ObservableRx();
-            var d = new Dictionary<string, string>();
-            d[""] = "Hello";
-            if (d.ContainsKey(""))
-            {
-
-            }
-            else
-            {
-
-            }
-            
+        {            
         }
     }
 }
