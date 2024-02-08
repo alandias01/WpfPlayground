@@ -1,0 +1,20 @@
+﻿<Window x:Class="WpfPlayground.DesignPatterns.ObservableRxView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPlayground.DesignPatterns"
+        mc:Ignorable="d"
+        Title="ObservableRxView" Height="450" Width="800">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">            
+            <Button Command="{Binding RunCommand}" Content="Run" Width="100" HorizontalAlignment="Left"/>
+            <Label Content="{Binding Name}"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>
