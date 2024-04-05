@@ -1,6 +1,6 @@
 ﻿using Prism.Mvvm;
 
-namespace WpfPlayground.INotify
+namespace WpfPlayground.Binding
 {
     public class ItemWithNotificationPrism : BindableBase
     {
@@ -9,7 +9,7 @@ namespace WpfPlayground.INotify
         public string Name
         {
             get => name;
-            set => this.SetProperty(ref name, value);            
+            set => SetProperty(ref name, value);
         }
     }
 }

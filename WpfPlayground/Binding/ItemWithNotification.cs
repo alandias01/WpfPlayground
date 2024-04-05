@@ -1,22 +1,22 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace WpfPlayground.INotify
+namespace WpfPlayground.Binding
 {
     public class ItemWithNotification : INotifyPropertyChanged
     {
         private string name1;
         private string name2;
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Name1 
-        { 
+        public string Name1
+        {
             get => name1;
             set
             {
                 name1 = value;
-                this.OnPropertyChanged1("name1");
+                OnPropertyChanged1("name1");
             }
         }
 
@@ -26,7 +26,7 @@ namespace WpfPlayground.INotify
             set
             {
                 name2 = value;
-                this.OnPropertyChanged2();
+                OnPropertyChanged2();
             }
         }
 
@@ -37,10 +37,10 @@ namespace WpfPlayground.INotify
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-                
+
         protected void OnPropertyChanged2([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }        
+        }
     }
 }

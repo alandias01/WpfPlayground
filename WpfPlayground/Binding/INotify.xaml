@@ -1,0 +1,28 @@
+﻿<Window x:Class="WpfPlayground.Binding.INotify"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPlayground.InterviewPractice"
+        mc:Ignorable="d"
+        Title="INotify" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBlock Width="100" Text="{Binding Name1}" />
+            <TextBlock Width="100" Text="{Binding Name2}" />
+            <Button Width="100" Content="Change name" Command="{Binding ChangeName}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <TextBlock Width="100" Text="{Binding Name3}" />
+            <TextBlock Width="100" Text="{Binding Name4}" />
+            <TextBox Width="100" Text="{Binding Name3}" />
+            <TextBox Width="100" Text="{Binding Name4, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+
+    </Grid>
+</Window>
