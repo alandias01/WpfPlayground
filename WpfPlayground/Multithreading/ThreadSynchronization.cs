@@ -38,6 +38,14 @@ namespace WpfPlayground.Multithreading
      * Spinning (Make an example)
      * A brief episode of spinning is often preferable to blocking, as it avoids the cost of context switching 
      * and kernel transitions
+     * 
+     * 
+     * WCF
+     * Create Service
+     *  New proj: IService: ServiceContrace, Service: Implementation, App.config:Endpoint ABC
+     * Client
+     *  Add service reference, nuget pkg
+     *  Client configuration file, defines the endpoint to connect to the service
     
      */
 

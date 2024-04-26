@@ -1,0 +1,19 @@
+﻿<Window x:Class="WpfPlayground.InterviewPractice.IntPrac202404.IntPrac202404Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPlayground.InterviewPractice.IntPrac202404"
+        mc:Ignorable="d"
+        Title="IntPrac202404Main" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="" />
+        </StackPanel>
+        
+    </Grid>
+</Window>
