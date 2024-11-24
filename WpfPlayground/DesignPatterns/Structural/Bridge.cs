@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace WpfPlayground.DesignPatterns
+namespace WpfPlayground.DesignPatterns.Structural
 {
     public class Bridge
     {
@@ -23,7 +23,7 @@ namespace WpfPlayground.DesignPatterns
             {
                 item.Print();
             }
-        }        
+        }
     }
 
     public interface IFormatter { string Format(string key, string value); }
@@ -44,13 +44,13 @@ namespace WpfPlayground.DesignPatterns
             Formatter = formatter;
         }
 
-        public abstract void Print();        
+        public abstract void Print();
     }
 
     public class Book : ManuScript
     {
         public Book(IFormatter formatter) : base(formatter) { }
-        
+
         public string Title { get; set; }
         public string Author { get; set; }
 
@@ -63,7 +63,7 @@ namespace WpfPlayground.DesignPatterns
     public class Paper : ManuScript
     {
         public Paper(IFormatter formatter) : base(formatter) { }
-        
+
         public string PaperName { get; set; }
         public string Author { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns
+namespace WpfPlayground.DesignPatterns.Creational.AbstractFactoryPatterns
 {
     //Create a person with an arm object that if normal, 5 fingers, retard has 6
 
@@ -10,7 +10,7 @@ namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns
         {
             var p = new Person(new RetardedPersonFactory());
             Console.WriteLine(p.Arm.fingers);
-        }        
+        }
     }
 
     public interface IPersonFactory
@@ -35,7 +35,7 @@ namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns
 
     public interface IArm
     {
-        int fingers { get; set; } 
+        int fingers { get; set; }
     }
 
     public class NormalArm : IArm
@@ -54,8 +54,8 @@ namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns
     {
         public IArm Arm;
         IPersonFactory IPF;
-        public Person(IPersonFactory IPF) 
-        { 
+        public Person(IPersonFactory IPF)
+        {
             this.IPF = IPF;
             Arm = IPF.CreateArm();
         }

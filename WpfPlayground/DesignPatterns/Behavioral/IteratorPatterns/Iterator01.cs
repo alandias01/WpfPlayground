@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
 
-namespace WpfPlayground.DesignPatterns.IteratorPatterns.IteratorPatterns01
+namespace WpfPlayground.DesignPatterns.Behavioral.IteratorPatterns
 {
     public interface IIterator { bool HasNext(); object Next(); }  //New    
-    public interface Menu { IIterator CreateIterator();}  //New
+    public interface Menu { IIterator CreateIterator(); }  //New
 
     public class DinnerMenuIterator : IIterator  //New
     {
@@ -12,14 +12,14 @@ namespace WpfPlayground.DesignPatterns.IteratorPatterns.IteratorPatterns01
         int position = 0;
 
         public DinnerMenuIterator(MenuItem[] items)
-        {this.items = items;}
-       
+        { this.items = items; }
+
         public bool HasNext()
         {
             if (position >= items.Length || items[position] == null)
-            {return false;}
-            
-            else{return true;}            
+            { return false; }
+
+            else { return true; }
         }
 
         public object Next()
@@ -27,7 +27,7 @@ namespace WpfPlayground.DesignPatterns.IteratorPatterns.IteratorPatterns01
             MenuItem menuItem = items[position];
             position += 1;
             return menuItem;
-        }        
+        }
     }
 
     public class PancakeHouseIterator : IIterator  //New
@@ -36,14 +36,14 @@ namespace WpfPlayground.DesignPatterns.IteratorPatterns.IteratorPatterns01
         int position = 0;
 
         public PancakeHouseIterator(ArrayList menuItems)
-        {this.menuItems = menuItems;}
-        
+        { this.menuItems = menuItems; }
+
         public bool HasNext()
         {
             if (position >= menuItems.Count || menuItems[position] == null)
-            {return false;}
-            
-            else { return true;}
+            { return false; }
+
+            else { return true; }
         }
 
         public object Next()
@@ -51,7 +51,7 @@ namespace WpfPlayground.DesignPatterns.IteratorPatterns.IteratorPatterns01
             MenuItem menuItem = (MenuItem)menuItems[position];
             position += 1;
             return menuItem;
-        }        
+        }
     }
 
     public class Waitress
@@ -84,9 +84,9 @@ namespace WpfPlayground.DesignPatterns.IteratorPatterns.IteratorPatterns01
     {
         string name, description; bool vegetarian; double price;
         public MenuItem(string name, string description, bool vegetarian, double price)
-        { 
-            this.name = name; this.description = description; 
-            this.vegetarian = vegetarian; this.price = price; 
+        {
+            this.name = name; this.description = description;
+            this.vegetarian = vegetarian; this.price = price;
         }
         public string getName() { return name; }
         public string getDescription() { return description; }
@@ -101,22 +101,22 @@ namespace WpfPlayground.DesignPatterns.IteratorPatterns.IteratorPatterns01
         public PancakeHouseMenu()
         {
             menuItems = new ArrayList();
-            AddItem("Pancake 1","P w/e_and_t",true,2.99);
-            AddItem("Pancake 2","P w/e_and_s",false,2.99);
-            AddItem("Pancake 3","P w/e_and_b",true,3.49);
-            AddItem("Waffles","W w/b_and_s",true,3.59);
+            AddItem("Pancake 1", "P w/e_and_t", true, 2.99);
+            AddItem("Pancake 2", "P w/e_and_s", false, 2.99);
+            AddItem("Pancake 3", "P w/e_and_b", true, 3.49);
+            AddItem("Waffles", "W w/b_and_s", true, 3.59);
         }
 
-        public void AddItem(string name, string desc,bool isVeg, double price)
+        public void AddItem(string name, string desc, bool isVeg, double price)
         {
-            MenuItem menuItem = new MenuItem(name, desc,isVeg, price);
+            MenuItem menuItem = new MenuItem(name, desc, isVeg, price);
             menuItems.Add(menuItem);
         }
 
         public ArrayList getMenuItems() { return menuItems; }
 
         public IIterator CreateIterator() //New
-        {return new PancakeHouseIterator(menuItems);}
+        { return new PancakeHouseIterator(menuItems); }
     }
 
     public class DinnerMenu //: Menu
@@ -129,29 +129,29 @@ namespace WpfPlayground.DesignPatterns.IteratorPatterns.IteratorPatterns01
         {
             menuItems = new MenuItem[MAX_ITEMS];
 
-            AddItem("Veg BLT","(F)BLT",true,2.99);
-            AddItem("BLT","BLT W",false,2.99);
-            AddItem("Soup", "S w/salad", false,3.29);
-            AddItem("Hotdog","HD srotc",false,3.05);
-            AddItem("Veg 2", "veg Wbr",true,3.99);
-            AddItem("Pasta", "spgti w mb",true,3.89);
+            AddItem("Veg BLT", "(F)BLT", true, 2.99);
+            AddItem("BLT", "BLT W", false, 2.99);
+            AddItem("Soup", "S w/salad", false, 3.29);
+            AddItem("Hotdog", "HD srotc", false, 3.05);
+            AddItem("Veg 2", "veg Wbr", true, 3.99);
+            AddItem("Pasta", "spgti w mb", true, 3.89);
         }
 
         public void AddItem(string name, string desc, bool isVeg, double price)
         {
             MenuItem menuItem = new MenuItem(name, desc, isVeg, price);
             if (numberOfItems >= MAX_ITEMS)
-            {Console.WriteLine("Sorry, menu is full! Can't add item to menu");}
+            { Console.WriteLine("Sorry, menu is full! Can't add item to menu"); }
             else
-            {menuItems[numberOfItems] = menuItem;numberOfItems += 1;}
+            { menuItems[numberOfItems] = menuItem; numberOfItems += 1; }
         }
 
         public MenuItem[] getMenuItems() { return menuItems; }
 
         public IIterator CreateIterator() //New
-        {return new DinnerMenuIterator(menuItems);}
+        { return new DinnerMenuIterator(menuItems); }
     }
-    
+
     public class Iterator01
     {
         public Iterator01()
@@ -169,7 +169,7 @@ namespace WpfPlayground.DesignPatterns.IteratorPatterns.IteratorPatterns01
 
             for (int j = 0; j < lunchItems.Length; j++)
             {
-                MenuItem menuItem=lunchItems[j];
+                MenuItem menuItem = lunchItems[j];
                 Console.WriteLine(menuItem.getName());
             }
 

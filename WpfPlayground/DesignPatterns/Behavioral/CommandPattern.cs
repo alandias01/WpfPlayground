@@ -1,6 +1,6 @@
-﻿using System; 
+﻿using System;
 
-namespace WpfPlayground.DesignPatterns
+namespace WpfPlayground.DesignPatterns.Behavioral
 {
     public class CommandPattern
     {

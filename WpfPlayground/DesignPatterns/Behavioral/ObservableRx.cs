@@ -6,7 +6,7 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
 
-namespace WpfPlayground.DesignPatterns
+namespace WpfPlayground.DesignPatterns.Behavioral
 {
     /* Rx is about how to react to changes and create data flows that depend on them
      * 
@@ -16,7 +16,8 @@ namespace WpfPlayground.DesignPatterns
     {
         public void ExecuteAsync(Action<string> callback)
         {
-            new Thread(() => {
+            new Thread(() =>
+            {
                 for (int i = 0; i < 3; i++)
                 {
                     var uniqueData = DateTime.Now.Millisecond.ToString();
@@ -34,9 +35,10 @@ namespace WpfPlayground.DesignPatterns
         public ObservableRx()
         {
             var ds = new DataService();
-            ds.ExecuteAsync((msg) => {
-                Debug.WriteLine(msg);            
-            });            
+            ds.ExecuteAsync((msg) =>
+            {
+                Debug.WriteLine(msg);
+            });
         }
 
         //public void Subs(IObserver<int> observer, IScheduler)
@@ -50,7 +52,7 @@ namespace WpfPlayground.DesignPatterns
 
         public void GetData(IObservable<int> obs)
         {
-            obs.Subscribe(x => this.DoSomething(x));
+            obs.Subscribe(x => DoSomething(x));
         }
 
         private void DoSomething(int x)

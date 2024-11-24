@@ -1,16 +1,16 @@
 ﻿using System;
 
-namespace WpfPlayground.DesignPatterns.FactoryPatterns
+namespace WpfPlayground.DesignPatterns.Creational.FactoryPatterns
 {
-    public abstract class Pizza 
+    public abstract class Pizza
     {
         public string name;
-        public void prepare() { Console.WriteLine("preparing "+name); }
+        public void prepare() { Console.WriteLine("preparing " + name); }
         public virtual void cut() { Console.WriteLine("Cutting diagonal slices"); }
         public string getName() { return name; }
     }
 
-    public class NYStyleCheesePizza : Pizza 
+    public class NYStyleCheesePizza : Pizza
     { public NYStyleCheesePizza() { name = "NYCheesePizza"; } }
 
     public class NYStyleMeatPizza : Pizza
@@ -23,7 +23,7 @@ namespace WpfPlayground.DesignPatterns.FactoryPatterns
     { public CHStyleCheesePizza() { name = "CHCheesePizza"; } }
 
     public abstract class PizzaStore
-    {                        
+    {
         public Pizza orderPizza(string type)
         {
             Pizza pizza;
@@ -39,7 +39,7 @@ namespace WpfPlayground.DesignPatterns.FactoryPatterns
     {
         protected override Pizza createPizza(string item)
         {
-            if (item.Equals("cheese")) {return new NYStyleCheesePizza();}
+            if (item.Equals("cheese")) { return new NYStyleCheesePizza(); }
             else if (item.Equals("meat")) { return new NYStyleMeatPizza(); }
             else return null;
         }
@@ -59,9 +59,9 @@ namespace WpfPlayground.DesignPatterns.FactoryPatterns
         {
             PizzaStore nystore = new NYPizzaStore();
             Pizza pizza = nystore.orderPizza("cheese");
-            Console.WriteLine("You ordered a " + pizza.getName()+"\n");
+            Console.WriteLine("You ordered a " + pizza.getName() + "\n");
             //Preparing NYCheesePizza, cutting diagonal slices, you ordered a NYCheesePizza 
-                        
+
             pizza = nystore.orderPizza("meat");
             Console.WriteLine("You ordered a " + pizza.getName() + "\n");
             //Preparing NYMeatPizza, cutting square slices, you ordered a NYMeatPizza

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns
+namespace WpfPlayground.DesignPatterns.Creational.AbstractFactoryPatterns
 {
     public class AbstractFactory
     {
@@ -33,7 +33,7 @@ namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns
         public string Name { get; set; }
         protected IDough dough;
         protected ISauce sauce;
-        protected IClams clam;        
+        protected IClams clam;
 
         public Pizza() { }
         public abstract void Prepare();
@@ -61,8 +61,8 @@ namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns
         protected abstract Pizza CreatePizza(string type);
     }
 
-    public interface IDough { string toString();}
-    public interface ISauce { string toString();}
+    public interface IDough { string toString(); }
+    public interface ISauce { string toString(); }
     public interface IClams { string toString(); }
 
     public interface IPizzaIngredientFactory
@@ -135,5 +135,5 @@ namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns
             }
             return pizza;
         }
-    }    
+    }
 }

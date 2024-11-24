@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
 
-namespace WpfPlayground.DesignPatterns.IteratorPatterns.IteratorPatterns02
+namespace WpfPlayground.DesignPatterns.Behavioral.IteratorPatterns
 {
     public interface IIterator { bool HasNext(); object Next(); }  //New    
-    public interface Menu { IIterator CreateIterator();}  //New
+    public interface Menu { IIterator CreateIterator(); }  //New
 
     public class DinnerMenuIterator : IIterator  //New
     {
@@ -55,7 +55,7 @@ namespace WpfPlayground.DesignPatterns.IteratorPatterns.IteratorPatterns02
     }
 
     public class Waitress
-    {        
+    {
         Menu phMenu, dMenu;
 
         public Waitress(Menu phMenu, Menu dMenu)
@@ -119,9 +119,10 @@ namespace WpfPlayground.DesignPatterns.IteratorPatterns.IteratorPatterns02
         public ArrayList getMenuItems() { return menuItems; }
 
         public IIterator CreateIterator() //New
-        { return new PancakeHouseIterator(menuItems); 
+        {
+            return new PancakeHouseIterator(menuItems);
             //return menuItems.  Iterator(); NEW
-        
+
         }
     }
 

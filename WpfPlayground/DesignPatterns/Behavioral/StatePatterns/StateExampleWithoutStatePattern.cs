@@ -1,33 +1,33 @@
 ﻿using System;
 using System.Text;
 
-namespace WpfPlayground.DesignPatterns.StatePatterns
+namespace WpfPlayground.DesignPatterns.Behavioral.StatePatterns
 {
     public class GumballMachineStart
     {
         const int SOLD_OUT = 0;
         int NO_QUARTER = 1, HAS_QUARTER = 2, SOLD = 3;
 
-        int count = 0, state = SOLD_OUT;        
+        int count = 0, state = SOLD_OUT;
 
         public GumballMachineStart(int count)
-        { this.count = count; if (count > 0){state = NO_QUARTER;} }
-        
+        { this.count = count; if (count > 0) { state = NO_QUARTER; } }
+
 
         public void InsertQuarter()
         {
             if (state == HAS_QUARTER)
             { Console.WriteLine("You can't insert another quarter"); }
 
-            else if(state ==NO_QUARTER)
+            else if (state == NO_QUARTER)
             { state = HAS_QUARTER; Console.WriteLine("You inserted a quarter"); }
 
-            else if(state ==SOLD_OUT)
+            else if (state == SOLD_OUT)
             { Console.WriteLine("You can't insert a quarter, the machine is sold out"); }
 
             else if (state == SOLD)
             { Console.WriteLine("Please wait, we're already giving you a gumball"); }
-            
+
         }
 
         public void EjectQuarter()
@@ -74,7 +74,7 @@ namespace WpfPlayground.DesignPatterns.StatePatterns
             { Console.WriteLine("\nNo gumball dispensed"); }
 
             else if (state == SOLD)
-            { 
+            {
                 Console.WriteLine("\nA gumball comes rolling out the slot");
                 count -= 1;
                 if (count == 0)
@@ -82,12 +82,12 @@ namespace WpfPlayground.DesignPatterns.StatePatterns
                     Console.WriteLine("\nNow out of gumballs!");
                     state = SOLD_OUT;
                 }
-                else {state = NO_QUARTER;}
+                else { state = NO_QUARTER; }
             }
         }
-       
+
         public void Refill(int newGumballs)
-        {this.count = newGumballs; state = NO_QUARTER;}
+        { count = newGumballs; state = NO_QUARTER; }
 
         public string MachineState()
         {
@@ -95,17 +95,17 @@ namespace WpfPlayground.DesignPatterns.StatePatterns
             result.Append("\nMighty Gumball, Inc.");
             result.Append("\nC# Enabled Standing Gumball Model #2005\n");
             result.Append("Inventory: " + count + " gumball");
-            if (count != 1) {result.Append("s");}
-            
+            if (count != 1) { result.Append("s"); }
+
             result.Append("\nMachine is ");
-            if (state == SOLD_OUT){result.Append("sold out");}
-            else if (state == NO_QUARTER){result.Append("waiting for quarter");}
-            else if (state == HAS_QUARTER){result.Append("waiting for turn of crank");}
-            else if (state == SOLD){result.Append("delivering a gumball");}
-            return result.ToString()+"\n";
+            if (state == SOLD_OUT) { result.Append("sold out"); }
+            else if (state == NO_QUARTER) { result.Append("waiting for quarter"); }
+            else if (state == HAS_QUARTER) { result.Append("waiting for turn of crank"); }
+            else if (state == SOLD) { result.Append("delivering a gumball"); }
+            return result.ToString() + "\n";
         }
 
-        public override string ToString(){return MachineState();}
+        public override string ToString() { return MachineState(); }
     }
 
 

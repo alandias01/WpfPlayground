@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace WpfPlayground.DesignPatterns
+namespace WpfPlayground.DesignPatterns.Structural
 {
     public abstract class Beverage
     {
         public string description = "Unknown Beverage";
-        public  virtual string getDescription() { return description; }
+        public virtual string getDescription() { return description; }
         public abstract double cost();
     }
 
@@ -14,13 +14,13 @@ namespace WpfPlayground.DesignPatterns
         //all condiment decorators required to reimplement getdescription
         //public abstract string getDescription(); //
     }
-        
+
     public class Espresso : Beverage
     {
         public Espresso() { description = "Espresso"; }
         public override double cost() { return 1.99; }
-    }    
-    
+    }
+
     public class Mocha : CondimentDecorator
     {
         Beverage beverage;
@@ -37,8 +37,8 @@ namespace WpfPlayground.DesignPatterns
         public override double cost() { return .3 + beverage.cost(); }
     }
 
-    public class Decorator 
-    { 
+    public class Decorator
+    {
         public Decorator()
         {
             Beverage beverage = new Espresso();
@@ -50,9 +50,9 @@ namespace WpfPlayground.DesignPatterns
             beverage2 = new Whip(beverage2);
             Console.WriteLine(beverage2.getDescription() + " $" + beverage2.cost());
             //Espresso, Mocha, Whip $2.49
- 
+
 
             string z = Console.ReadLine();
         }
-    }    
+    }
 }

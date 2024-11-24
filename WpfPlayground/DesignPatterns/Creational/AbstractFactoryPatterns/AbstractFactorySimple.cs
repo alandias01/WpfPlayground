@@ -1,11 +1,11 @@
 ﻿using System;
 
 //Added extra namespace suffix (AbstractFactory2) to avoid class name duplicates like ClamPizza
-namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns.AbstractFactory2
-{    
+namespace WpfPlayground.DesignPatterns.Creational.AbstractFactoryPatterns
+{
     public interface IDough { string getName(); }
     public class ThinCrustDough : IDough { public string getName() { return "TCD"; } }
-    public interface IPIF { IDough createDough();}
+    public interface IPIF { IDough createDough(); }
     public class NYPIF : IPIF { public IDough createDough() { return new ThinCrustDough(); } }
 
     public abstract class Pizza
@@ -15,20 +15,20 @@ namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns.AbstractFactory2
         public abstract void prepare();
     }
 
-    public class ClamPizza:Pizza
+    public class ClamPizza : Pizza
     {
         IPIF ingFac;
         public ClamPizza(IPIF ingFac) { this.ingFac = ingFac; }
-        public override void prepare() 
-        { 
-            dough = ingFac.createDough(); 
-            Name = "thincrust"; 
-            Console.WriteLine("Preparing " + dough.getName()); 
+        public override void prepare()
+        {
+            dough = ingFac.createDough();
+            Name = "thincrust";
+            Console.WriteLine("Preparing " + dough.getName());
         }
     }
 
     public abstract class PizzaStore
-    {        
+    {
         public void orderPizza()
         {
             Pizza pizza;
@@ -40,7 +40,7 @@ namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns.AbstractFactory2
 
     public class NYPizzaStore : PizzaStore
     {
-        IPIF ingFac; 
+        IPIF ingFac;
         Pizza pizza;
         protected override Pizza createPizza()
         {
@@ -48,7 +48,7 @@ namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns.AbstractFactory2
             //switch
             pizza = new ClamPizza(ingFac);
             //end switch
-            return pizza;            
+            return pizza;
         }
     }
 
@@ -57,7 +57,7 @@ namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns.AbstractFactory2
         public AbstractFactorySimple()
         {
             PizzaStore a = new NYPizzaStore();
-            a.orderPizza();            
+            a.orderPizza();
         }
     }
 }

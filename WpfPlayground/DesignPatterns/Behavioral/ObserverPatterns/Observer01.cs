@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WpfPlayground.DesignPatterns.ObserverPatterns
+namespace WpfPlayground.DesignPatterns.Behavioral.ObserverPatterns
 {
     public interface Subject
-    { 
-        void registerObserver(IObserver o); 
-        void removeObserver(IObserver o); 
-        void notifyObservers(); 
+    {
+        void registerObserver(IObserver o);
+        void removeObserver(IObserver o);
+        void notifyObservers();
     }
 
     public interface IObserver
-    { 
-        void update(float temp, float humidity, float pressure); 
+    {
+        void update(float temp, float humidity, float pressure);
     }
 
     public interface DisplayElement
-    { 
-        void display(); 
+    {
+        void display();
     }
 
     public class WeatherData : Subject
@@ -48,26 +48,26 @@ namespace WpfPlayground.DesignPatterns.ObserverPatterns
         }
     }
 
-        public class CurrentConditionsDisplay : IObserver, DisplayElement
+    public class CurrentConditionsDisplay : IObserver, DisplayElement
+    {
+        private float temperature, humidity;
+        private Subject weatherData;
+
+        public CurrentConditionsDisplay(Subject weatherData)
         {
-            private float temperature, humidity; 
-            private Subject weatherData;
-
-            public CurrentConditionsDisplay(Subject weatherData)
-            {
-                this.weatherData = weatherData;
-                weatherData.registerObserver(this);
-            }
-
-            public void update(float temperature, float humidity, float pressure)
-            {
-                this.temperature = temperature;
-                this.humidity = humidity; display();
-            }
-
-            public void display() { Console.WriteLine("Temp: " + temperature + "\nHumidity: " + humidity); }
+            this.weatherData = weatherData;
+            weatherData.registerObserver(this);
         }
-     
+
+        public void update(float temperature, float humidity, float pressure)
+        {
+            this.temperature = temperature;
+            this.humidity = humidity; display();
+        }
+
+        public void display() { Console.WriteLine("Temp: " + temperature + "\nHumidity: " + humidity); }
+    }
+
     public class Observer01
     {
         public Observer01()

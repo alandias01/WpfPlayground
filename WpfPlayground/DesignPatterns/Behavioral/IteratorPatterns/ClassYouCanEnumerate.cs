@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace WpfPlayground.DesignPatterns.IteratorPatterns
+namespace WpfPlayground.DesignPatterns.Behavioral.IteratorPatterns
 {
     public class ClassYouCanEnumerate<T> : IEnumerable<T>
     {
@@ -23,6 +23,6 @@ namespace WpfPlayground.DesignPatterns.IteratorPatterns
             //return ie.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

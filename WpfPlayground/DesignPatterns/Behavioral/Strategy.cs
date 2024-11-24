@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfPlayground.DesignPatterns
+namespace WpfPlayground.DesignPatterns.Behavioral
 {
     public class Strategy
     {
@@ -23,7 +23,7 @@ namespace WpfPlayground.DesignPatterns
     }
 
     public class GenericCar : ICar
-    {        
+    {
         public GenericCar()
         {
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns
+namespace WpfPlayground.DesignPatterns.Creational.AbstractFactoryPatterns
 {
     /*
      * Bond has attributes like maturity date
@@ -8,17 +8,17 @@ namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns
      * The value of the attribute depends on where the muni was created
      * Maturity date is different in NY and NJ
      */
-    
-    public interface IMaturity { DateTime getDate();}
-    
-    public class NYMaturity : IMaturity 
-    { public DateTime getDate() { return  new DateTime(2010, 9, 1); } }
+
+    public interface IMaturity { DateTime getDate(); }
+
+    public class NYMaturity : IMaturity
+    { public DateTime getDate() { return new DateTime(2010, 9, 1); } }
 
     public class NJMaturity : IMaturity
     { public DateTime getDate() { return new DateTime(2012, 8, 8); } }
-    
+
     public interface IExchangeAttributeFactory
-    { IMaturity setMaturity();}
+    { IMaturity setMaturity(); }
 
     public class NYExchangeAttributeFactory : IExchangeAttributeFactory
     { public IMaturity setMaturity() { return new NYMaturity(); } }
@@ -30,17 +30,17 @@ namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns
     { public IMaturity maturity; }
 
     public class MuniBond : Bond
-    {        
+    {
         public MuniBond(IExchangeAttributeFactory IEAF)
         {
-            this.maturity = IEAF.setMaturity();
+            maturity = IEAF.setMaturity();
         }
     }
-    
+
     public abstract class Exchange
     {
         Bond bond;
-        public Exchange() {bond = createBond(); }
+        public Exchange() { bond = createBond(); }
 
         public abstract Bond createBond();
 
@@ -55,7 +55,7 @@ namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns
             IEAF = new NYExchangeAttributeFactory();
             Bond muni = new MuniBond(IEAF);
             return muni;
-        } 
+        }
     }
 
     public class NJExchange : Exchange
@@ -68,13 +68,13 @@ namespace WpfPlayground.DesignPatterns.AbstractFactoryPatterns
             return muni;
         }
     }
-    
+
     class AbstractFactoryUsingBonds
     {
         public AbstractFactoryUsingBonds()
         {
             Exchange myExchange = new NYExchange();
             myExchange.show();
-        }        
+        }
     }
 }

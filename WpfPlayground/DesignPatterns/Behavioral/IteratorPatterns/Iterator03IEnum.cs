@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
 
-namespace WpfPlayground.DesignPatterns.IteratorPatterns.IteratorPatterns03
+namespace WpfPlayground.DesignPatterns.Behavioral.IteratorPatterns
 {
-    public interface Menu { IEnumerator CreateIterator();}
+    public interface Menu { IEnumerator CreateIterator(); }
 
     public class MenuItem
     {

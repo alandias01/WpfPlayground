@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace WpfPlayground.DesignPatterns
+namespace WpfPlayground.DesignPatterns.Creational
 {
     public class SingletonExamples
-    {        
+    {
         public SingletonExamples()
-        {                       
+        {
         }
     }
 
@@ -56,7 +56,7 @@ namespace WpfPlayground.DesignPatterns
     {
         private static readonly Singleton2 instance = new Singleton2();
 
-        private Singleton2() { }        
+        private Singleton2() { }
 
         public static Singleton2 Instance
         {
@@ -107,7 +107,7 @@ namespace WpfPlayground.DesignPatterns
     public sealed class Singleton3
     {
         private static volatile Singleton3 instance;
-        private static object syncRoot = new Object();
+        private static object syncRoot = new object();
 
         private Singleton3() { }
 

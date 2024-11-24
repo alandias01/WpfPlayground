@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WpfPlayground.DesignPatterns
+namespace WpfPlayground.DesignPatterns.Behavioral
 {
     //Original problem
     public class CoffeeOld
@@ -10,7 +10,7 @@ namespace WpfPlayground.DesignPatterns
         private void pourInCup() { }
         private void addSugerAndMilk() { }
 
-        public void prepareRecipe() 
+        public void prepareRecipe()
         { boilWater(); brewCoffeeGrinds(); pourInCup(); addSugerAndMilk(); }
     }
 
@@ -21,7 +21,7 @@ namespace WpfPlayground.DesignPatterns
         private void pourInCup() { }
         private void addLemon() { }
 
-        public void prepareRecipe() 
+        public void prepareRecipe()
         { boilWater(); steepTeaBag(); pourInCup(); addLemon(); }
     }
 
@@ -43,8 +43,8 @@ namespace WpfPlayground.DesignPatterns
         //Optional Hook version
         public void PrepareRecipeWithHook(bool ans)
         {
-            boilWater(); brew(); pourInCup(); 
-            if ( CustomerWantsCondiments(ans) ) { addCondiment(); } 
+            boilWater(); brew(); pourInCup();
+            if (CustomerWantsCondiments(ans)) { addCondiment(); }
         }
 
         public virtual bool CustomerWantsCondiments(bool ans) { return true; }//Hook
@@ -67,7 +67,7 @@ namespace WpfPlayground.DesignPatterns
         public override void brew() {/*Dripping Coffee */ }
         public override void addCondiment() { Console.WriteLine("added"); /*Sugar and Milk*/ }
         public override bool CustomerWantsCondiments(bool ans)
-        { if (ans) { return true;} else {return false;} } //Option to override hook. We can ask if user wants milk         
+        { if (ans) { return true; } else { return false; } } //Option to override hook. We can ask if user wants milk         
     }
 
     //We generalized the prepareRecipe method
@@ -77,7 +77,7 @@ namespace WpfPlayground.DesignPatterns
     //We have hook in abstrat class and let the lower level classes override
     //Hook gives subclass option to get involved in the steps of the template
     //pg 295 has more details for Hooks purpose
-    
+
     public class Template
     {
         public Template()

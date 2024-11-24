@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Text;
 
-namespace WpfPlayground.DesignPatterns.StatePatterns
+namespace WpfPlayground.DesignPatterns.Behavioral.StatePatterns
 {
     public class GumballMachine
-    {        
+    {
         State soldOutState, noQuarterState, hasQuarterState, soldState, state;
         int count = 0;
-        
+
         public GumballMachine(int numberOfGumballs)
         {
             state = soldOutState;
@@ -15,10 +15,10 @@ namespace WpfPlayground.DesignPatterns.StatePatterns
             noQuarterState = new NoQuarterState(this);
             hasQuarterState = new HasQuarterState(this);
             soldState = new SoldState(this);
-            this.count = numberOfGumballs;
-            
-            if (numberOfGumballs > 0) {state = noQuarterState;}
-            else{state = soldOutState;}
+            count = numberOfGumballs;
+
+            if (numberOfGumballs > 0) { state = noQuarterState; }
+            else { state = soldOutState; }
         }
 
         public State getsoldOutState() { return soldOutState; }
@@ -28,22 +28,22 @@ namespace WpfPlayground.DesignPatterns.StatePatterns
         public int getCount() { return count; }
 
 
-        public void InsertQuarter() {state.InsertQuarter();}
-        public void EjectQuarter() {state.EjectQuarter();}
-        public void TurnCrank() {state.TurnCrank(); state.Dispense();}
+        public void InsertQuarter() { state.InsertQuarter(); }
+        public void EjectQuarter() { state.EjectQuarter(); }
+        public void TurnCrank() { state.TurnCrank(); state.Dispense(); }
         public void setState(State state) { this.state = state; }
 
         public void ReleaseBall()
-        {            
+        {
             Console.WriteLine("A gumball comes rolling out the slot...\n");
             if (count != 0) { count -= 1; }
         }
-        
+
         public void Refill(int numberOfGumballs)
         {
-            this.count += numberOfGumballs;
+            count += numberOfGumballs;
             state = noQuarterState;
-            Console.WriteLine("\nRefill: " + numberOfGumballs + 
+            Console.WriteLine("\nRefill: " + numberOfGumballs +
                 " gumballs were added. " +
                 "The gumball count in now: " + count + "\n");
         }
@@ -54,7 +54,7 @@ namespace WpfPlayground.DesignPatterns.StatePatterns
             result.Append("Mighty Gumball, Inc.");
             result.Append("\nC# Enabled Standing Gumball Model #2005\n");
             result.Append("Inventory: " + count + " gumball");
-            if (count != 1){result.Append("s");}
+            if (count != 1) { result.Append("s"); }
             result.Append("\nMachine is " + state.ToString());
             return result.ToString();
         }
@@ -63,8 +63,8 @@ namespace WpfPlayground.DesignPatterns.StatePatterns
     }
 
     public interface State
-    { 
-        void InsertQuarter(); void EjectQuarter(); 
+    {
+        void InsertQuarter(); void EjectQuarter();
         void TurnCrank(); void Dispense();
     }
 
@@ -72,29 +72,29 @@ namespace WpfPlayground.DesignPatterns.StatePatterns
     {
         GumballMachine gumBallMachine;
         public SoldOutState(GumballMachine gumballMachine)
-        { this.gumBallMachine = gumballMachine; }
+        { gumBallMachine = gumballMachine; }
 
         public void InsertQuarter() { Console.WriteLine("Can't insert quarter, machine is soldout\n"); }
         public void EjectQuarter() { Console.WriteLine("Can't eject, you haven't inserted a quarter yet\n"); }
         public void TurnCrank() { Console.WriteLine("Sorry, you already turned the crank\n"); }
-        public void Dispense() 
+        public void Dispense()
         {
             gumBallMachine.ReleaseBall();
-            Console.WriteLine("You turned, but there are no gumballs\n"); 
+            Console.WriteLine("You turned, but there are no gumballs\n");
         }
-        public override string ToString(){return "sold out";}
+        public override string ToString() { return "sold out"; }
     }
 
     public class NoQuarterState : State
     {
         GumballMachine gumBallMachine;
         public NoQuarterState(GumballMachine gumballMachine)
-        { this.gumBallMachine = gumballMachine; }
+        { gumBallMachine = gumballMachine; }
 
-        public void InsertQuarter() 
+        public void InsertQuarter()
         {
             Console.WriteLine("You inserted a quarter\n");
-            gumBallMachine.setState(gumBallMachine.gethasQuarterState());        
+            gumBallMachine.setState(gumBallMachine.gethasQuarterState());
         }
 
         public void EjectQuarter() { Console.WriteLine("You haven't inserted a quarter\n"); }
@@ -107,30 +107,31 @@ namespace WpfPlayground.DesignPatterns.StatePatterns
     {
         GumballMachine gumBallMachine;
         public SoldState(GumballMachine gumballMachine)
-        { this.gumBallMachine = gumballMachine; }
+        { gumBallMachine = gumballMachine; }
 
         public void InsertQuarter() { Console.WriteLine("Please wait, we're already giving you a gumball\n"); }
         public void EjectQuarter() { Console.WriteLine("Sorry, you already turned the crank\n"); }
         public void TurnCrank() { Console.WriteLine("Turning twice doesn't get you another gumball!\n"); }
-        public void Dispense() 
+        public void Dispense()
         {
             gumBallMachine.ReleaseBall();
             if (gumBallMachine.getCount() > 0)
-            {gumBallMachine.setState(gumBallMachine.getNoQuarterState());}
+            { gumBallMachine.setState(gumBallMachine.getNoQuarterState()); }
             else
             {
                 Console.WriteLine("Oops, out of gumballs!\n");
-                gumBallMachine.setState(gumBallMachine.getsoldOutState()); }             
+                gumBallMachine.setState(gumBallMachine.getsoldOutState());
+            }
         }
         public override string ToString() { return "delivering a gumball"; }
     }
-    
+
     public class HasQuarterState : State
-    {        
+    {
         GumballMachine gumballMachine;
-        
+
         public HasQuarterState(GumballMachine gumballMachine)
-        {this.gumballMachine = gumballMachine;}
+        { this.gumballMachine = gumballMachine; }
 
         public void InsertQuarter()
         { Console.WriteLine("You can't insert another quarter\n"); }
@@ -138,7 +139,7 @@ namespace WpfPlayground.DesignPatterns.StatePatterns
         public void EjectQuarter()
         {
             Console.WriteLine("Quarter returned\n");
-            gumballMachine.setState(gumballMachine.getNoQuarterState());        
+            gumballMachine.setState(gumballMachine.getNoQuarterState());
         }
 
         public void TurnCrank()
@@ -148,24 +149,24 @@ namespace WpfPlayground.DesignPatterns.StatePatterns
         }
 
         public void Dispense()
-        {            
+        {
             //gumballMachine.ReleaseBall(); //not sure
-            Console.WriteLine("No gumball dispensed\n");            
+            Console.WriteLine("No gumball dispensed\n");
         }
-        
-        public override string ToString(){return "waiting for turn of crank";}        
-    }    
+
+        public override string ToString() { return "waiting for turn of crank"; }
+    }
 
     public class StateExample
-    {        
+    {
         public StateExample()
         {
-            GumballMachine gbm = new GumballMachine(3); 
-            
+            GumballMachine gbm = new GumballMachine(3);
+
             Console.WriteLine(gbm);
             gbm.InsertQuarter(); gbm.TurnCrank();
-            
-            Console.WriteLine(gbm); 
+
+            Console.WriteLine(gbm);
             gbm.TurnCrank();
 
             Console.WriteLine(gbm);
@@ -173,7 +174,7 @@ namespace WpfPlayground.DesignPatterns.StatePatterns
 
             Console.WriteLine(gbm);
             gbm.InsertQuarter(); gbm.EjectQuarter(); gbm.TurnCrank();
-            
+
             Console.WriteLine(gbm);
             gbm.InsertQuarter(); gbm.TurnCrank();
 
