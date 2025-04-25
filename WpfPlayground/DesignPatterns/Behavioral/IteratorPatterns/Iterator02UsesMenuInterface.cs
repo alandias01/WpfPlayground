@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-namespace WpfPlayground.DesignPatterns.Behavioral.IteratorPatterns
+namespace WpfPlayground.DesignPatterns.Behavioral.IteratorPatternsUsesMenuInterface
 {
     public interface IIterator { bool HasNext(); object Next(); }  //New    
     public interface Menu { IIterator CreateIterator(); }  //New

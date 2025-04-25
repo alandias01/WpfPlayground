@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-namespace WpfPlayground.DesignPatterns.Behavioral.ObserverPatterns
+namespace WpfPlayground.DesignPatterns.Behavioral.ObserverPatternsSimple
 {
     interface ISubject { void regObs(IObserver o); void notifyObs(); }
     interface IObserver { void update(int a); }
@@ -24,6 +24,11 @@ namespace WpfPlayground.DesignPatterns.Behavioral.ObserverPatterns
         public DSP1(WeatherData wd) { this.wd = wd; wd.regObs(this); }
         public void update(int a) { this.a = a; display(); }
         public void display() { Console.WriteLine("DSP1 " + a); }
+
+        public void update(float temp, float humidity, float pressure)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     class DSP2 : IObserver
@@ -32,6 +37,11 @@ namespace WpfPlayground.DesignPatterns.Behavioral.ObserverPatterns
         public DSP2(WeatherData wd) { this.wd = wd; wd.regObs(this); }
         public void update(int a) { this.a = a; display(); }
         public void display() { Console.WriteLine("DSP2 " + (a + 2)); }
+
+        public void update(float temp, float humidity, float pressure)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class ObserverSimple

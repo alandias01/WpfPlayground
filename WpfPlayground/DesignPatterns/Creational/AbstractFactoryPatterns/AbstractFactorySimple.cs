@@ -1,7 +1,7 @@
 ﻿using System;
 
 //Added extra namespace suffix (AbstractFactory2) to avoid class name duplicates like ClamPizza
-namespace WpfPlayground.DesignPatterns.Creational.AbstractFactoryPatterns
+namespace WpfPlayground.DesignPatterns.Creational.AbstractFactoryPatternsSimple
 {
     public interface IDough { string getName(); }
     public class ThinCrustDough : IDough { public string getName() { return "TCD"; } }

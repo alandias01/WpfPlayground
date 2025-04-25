@@ -66,6 +66,11 @@ namespace WpfPlayground.DesignPatterns.Behavioral.ObserverPatterns
         }
 
         public void display() { Console.WriteLine("Temp: " + temperature + "\nHumidity: " + humidity); }
+
+        public void update(int a)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class Observer01
