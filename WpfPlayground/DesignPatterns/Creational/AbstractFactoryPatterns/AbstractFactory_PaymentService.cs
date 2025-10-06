@@ -127,6 +127,65 @@ namespace WpfPlayground.DesignPatterns.Creational.AbstractFactoryPatterns
         }
     }
 
+    /*
+                                 +-------------------+
+                                 |   IPaymentFactory |  <<Abstract Factory>>
+                                 |-------------------|
+                                 | + CreatePaymentProcessor() : IPaymentProcessor
+                                 | + CreateReceipt() : IReceipt
+                                 +---------+---------+
+                                           |
+                  -------------------------------------------------
+                  |                                               |
+        +---------------------------+               +--------------------------+
+        | CreditCardPaymentFactory  |               | PayPalPaymentFactory     |
+        |---------------------------|               |--------------------------|
+        | + CreatePaymentProcessor()|               | + CreatePaymentProcessor()|
+        | + CreateReceipt()         |               | + CreateReceipt()        |
+        +-------------+-------------+               +-------------+------------+
+                      |                                               |
+           ---------------------------                     ---------------------------
+           |                         |                     |                         |
+        +-------------------+   +-------------------+  +-------------------+   +-------------------+
+        | CreditCardProcessor|  | CreditCardReceipt |  | PayPalProcessor   |  | PayPalReceipt     |
+        |-------------------|  |-------------------|  |-------------------|  |-------------------|
+        | + ProcessPayment()|  | + GenerateReceipt()|  | + ProcessPayment()|  | + GenerateReceipt()|
+        +---------^---------+  +---------^---------+  +---------^---------+  +---------^---------+
+                  |                     |                     |                     |
+                  |                     |                     |                     |
+        +-------------------+   +-------------------+  +-------------------+   +-------------------+
+        | IPaymentProcessor |   | IReceipt          |  | IPaymentProcessor |   | IReceipt          |
+        |-------------------|   |-------------------|  |-------------------|   |-------------------|
+        | + ProcessPayment()|   | + GenerateReceipt()|  | + ProcessPayment()|   | + GenerateReceipt()|
+        +-------------------+   +-------------------+  +-------------------+   +-------------------+
+        
+
+        +-------------------+
+        |   PaymentService  |   <<Client>>
+        |-------------------|
+        | - _processor      |
+        | - _receipt        |
+        |-------------------|
+        | + MakePayment()   |
+        +---------^---------+
+                  |
+                  | uses
+                  |
+        +-------------------+
+        | IPaymentFactory   |
+        +-------------------+
+
+     
+        +----------------------------------+
+        | AbstractFactory_PaymentService   |  <<Demo/Usage>>
+        |----------------------------------|
+        |  new PaymentService(factory)     |
+        |  .MakePayment(amount)            |
+        +----------------------------------+
+
+
+     
+     */
 
 
     //Example 2
