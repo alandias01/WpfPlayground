@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfPlayground.DesignPatterns.Creational.FactoryPatterns;
 
 namespace WpfPlayground.DesignPatterns.Creational.AbstractFactoryPatterns
 {
@@ -128,52 +129,93 @@ namespace WpfPlayground.DesignPatterns.Creational.AbstractFactoryPatterns
 
 
 
-    //Ex 2
+    //Example 2
+
     // Abstract Product A
     public interface IButton
     {
         void Render();
     }
 
+    // Abstract Product B
+    public interface ICheckbox
+    {
+        void Paint();
+    }
+
     // Concrete Product A1
     public class WindowsButton : IButton
     {
-        public void Render()
-        {
-            Console.WriteLine("Rendering a Windows button.");
-        }
+        public void Render() { Console.WriteLine("Rendering a Windows button."); }
+    }
+
+    // Concrete Product B1
+    public class WindowsCheckbox : ICheckbox
+    {
+        public void Paint() { Console.WriteLine("Windows Paint"); }
     }
 
     // Concrete Product A2
     public class MacOSButton : IButton
     {
-        public void Render()
-        {
-            Console.WriteLine("Rendering a macOS button.");
-        }
+        public void Render() { Console.WriteLine("Rendering a macOS button."); }
+    }
+
+    // Concrete Product B2
+    public class MacOSCheckbox : ICheckbox
+    {
+        public void Paint() { Console.WriteLine("Mac Paint"); }
     }
 
     // Abstract Factory
     public interface IUIFactory
     {
         IButton CreateButton();
+        ICheckbox CreateCheckbox();
     }
 
     // Concrete Factory 1
     public class WindowsUIFactory : IUIFactory
     {
-        public IButton CreateButton()
-        {
-            return new WindowsButton();
-        }
+        public IButton CreateButton() => new WindowsButton();
+        public ICheckbox CreateCheckbox() => new WindowsCheckbox();
     }
 
     // Concrete Factory 2
     public class MacOSUIFactory : IUIFactory
     {
-        public IButton CreateButton()
+        public IButton CreateButton() => new MacOSButton();
+        public ICheckbox CreateCheckbox() => new MacOSCheckbox();
+    }
+
+    public class UIClientApp
+    {
+        private readonly IButton _button;
+        private readonly ICheckbox _checkbox;
+
+        public UIClientApp(IUIFactory factory)
         {
-            return new MacOSButton();
+            _button = factory.CreateButton();
+            _checkbox = factory.CreateCheckbox();
+        }
+
+        public void Start()
+        {
+            _button.Render();
+            _checkbox.Paint();
+        }
+    }
+
+    public class AbstractFactory_Ex2Usage
+    {
+        IUIFactory _factory;
+
+        public AbstractFactory_Ex2Usage()
+        {
+            string os = "windows";
+            _factory = os == "windows" ? new WindowsUIFactory() : new MacOSUIFactory();
+
+            new UIClientApp(_factory).Start();
         }
     }
 }
