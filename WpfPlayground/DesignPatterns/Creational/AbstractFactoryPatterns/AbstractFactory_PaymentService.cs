@@ -218,4 +218,40 @@ namespace WpfPlayground.DesignPatterns.Creational.AbstractFactoryPatterns
             new UIClientApp(_factory).Start();
         }
     }
+
+    /*
+                            +-------------------+
+                            |    IUIFactory     |  <<Abstract Factory>>
+                            |-------------------|
+                            | + CreateButton()  |
+                            | + CreateCheckbox()|
+                            +---------+---------+
+                                      |
+                    -----------------------------------------
+                    |                                       |
+            +---------------------+              +---------------------+
+            |  WindowsUIFactory   |              |   MacOSUIFactory    |
+            |---------------------|              |---------------------|
+            | + CreateButton()    |              | + CreateButton()    |
+            | + CreateCheckbox()  |              | + CreateCheckbox()  |
+            +----------+----------+              +----------+----------+
+                       |                                    |
+               ------------------                   ------------------
+               |                |                   |                |
+            +----------------+  +----------------+  +----------------+  +----------------+
+            | WindowsButton  |  | WindowsCheckbox|  | MacOSButton    |  | MacOSCheckbox  |
+            |----------------|  |----------------|  |----------------|  |----------------|
+            | + Render()     |  | + Render()     |  | + Render()     |  | + Render()     |
+            +----------------+  +----------------+  +----------------+  +----------------+
+                   ^                        ^               ^                     ^
+                   |                        |               |                     |
+                   |                        |               |                     |
+            +----------------+       +----------------+  +----------------+  +----------------+
+            |  IButtonControl|       |ICheckboxControl|  |  IButtonControl|  |ICheckboxControl|
+            |----------------|       |----------------|  |----------------|  |----------------|
+            | + Render()     |       | + Render()     |  | + Render()     |  | + Render()     |
+            +----------------+       +----------------+  +----------------+  +----------------+
+            
+            
+     */
 }
