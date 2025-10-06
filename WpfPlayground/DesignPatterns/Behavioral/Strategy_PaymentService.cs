@@ -8,10 +8,15 @@ namespace WpfPlayground.DesignPatterns.Behavioral
 {
     /* Strategy Pattern Google AI 20251005
      * 
-     * Define a family of algorithms, encapsulate each one, and make them interchangeable
-     * The Strategy pattern lets the algorithm vary independently from the clients that use it.
+     * The context delegates its behavior/operation to the interchangeable strategy (IStrategy)
+     * Strategy represents different behaviors, which are encapsulated in separate classes (that are interchangeable)
+     * The context uses the strategy to perform its operations
+     * Context doesn't care how strategy works, it just delegates
+     * You can add/change strategies without modifying the context
      * 
-     *           Context: The class that uses the strategy.  It holds a reference to the IPaymentStrategy
+     * The Strategy pattern lets the behavior vary independently from the context that use it.     * 
+     * 
+     *           Context: The class that uses the strategy.  It holds a reference to the IStrategy
      *         IStrategy: The interface or abstract class defining the common operation for all concrete strategies
      * Concrete Strategy: Implementations of the IStrategy interface, each providing a specific algorithm.
      * 
