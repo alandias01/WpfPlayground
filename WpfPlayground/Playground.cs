@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WpfPlayground.DesignPatterns.Behavioral;
+using WpfPlayground.Projects;
 
 namespace WpfPlayground
 {
@@ -35,6 +36,7 @@ namespace WpfPlayground
 
         public Playground()
         {
+            new HtmlTemplateEditor().Show();
         }
     }
 }
