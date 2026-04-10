@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -45,6 +46,21 @@ namespace WpfPlayground.DesignPatterns.Behavioral
         public ProducerConsumer() 
         {
             FixedCollectionCPUBound();
+        }
+
+        public static double BusyWork(int iterations)
+        {
+            double result = 0;
+            for (int i = 0; i < iterations; i++)
+            {                
+                result += Math.Sqrt(i) * Math.Sin(i);
+                
+                for (int j = 0; j < 100; j++)
+                {
+                    result += Math.Pow(result, 0.5);
+                }
+            }
+            return result;
         }
 
         private void BasicProducerConsumer()
@@ -233,6 +249,11 @@ namespace WpfPlayground.DesignPatterns.Behavioral
             });
 
             Task.WhenAll(p, c);            
+        }
+
+        private void ProducerConsumerIO_AND_CPU()
+        {
+
         }
     }
 }
