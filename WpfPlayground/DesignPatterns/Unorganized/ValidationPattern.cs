@@ -27,23 +27,22 @@ namespace WpfPlayground.DesignPatterns.Unorganized
             result = compositeValidator.IsValid(user);
 
             /* Factory
-             * The purpose of using factory is you do setup somewhere else, then pass that to 
-             * a section where the focus is running the validation, not focused on validator creation
-             * This allows you to modify creation outside the area focused on running the validation             
+             * When you want to manage validator creation separately
+             * Here you focus on running the validation, not on validator creation, how its constructed
+             * This allows you to modify creation outside the area focused on running the validation
              */
             var vFac = new ValidationFactory<User>();
             vFac.RegisterValidator(new UserValidator());
             vFac.RegisterValidator(new DrinkingAgeValidator());
-            ValidationUsingFactory(vFac);
+            var compositeValidator2 = vFac.CreateCompositeValidator();
+            result = compositeValidator2.IsValid(user);            
         }
+    }
 
-        //Focus is on user and running the validation, not how the validator is constructed
-        public void ValidationUsingFactory(ValidationFactory<User> validationFactory)
-        {
-            var user = new User() { Name = "Alan", Age = 1 };
-            var compositeValidator = validationFactory.CreateCompositeValidator();
-            compositeValidator.IsValid(user);
-        }
+    public class User
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
     }
 
     public interface IValidator<T>
@@ -80,11 +79,7 @@ namespace WpfPlayground.DesignPatterns.Unorganized
             return _validators.All(v => v.IsValid(entity));
         }
     }
-
-    //Using a factory
-    //When you want to manage validator creation separately
-    //When you need flexibility adding new validators without modifying existing code
-
+        
     public class ValidationFactory<T>
     {
         private readonly List<IValidator<T>> _validators = new List<IValidator<T>>();
@@ -92,11 +87,4 @@ namespace WpfPlayground.DesignPatterns.Unorganized
         public void RegisterValidator(IValidator<T> validator) => _validators.Add(validator);
         public IValidator<T> CreateCompositeValidator() => new CompositeValidator<T>(_validators);
     }
-
-    public class User
-    {
-        public string Name { get; set; }
-        public int Age { get; set; }
-    }
-
 }
